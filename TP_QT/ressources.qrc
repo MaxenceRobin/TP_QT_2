@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="addStaffIcon">icons/icons8-add-user-male-32.png</file>
+        <file alias="addClientIcon">icons/icons8-new-contact-32.png</file>
+        <file alias="mainWndowIcon">icons/icons8-profile-32.png</file>
+        <file alias="logoPolytechTours">images/Polytech_Tours.png</file>
+        <file alias="aboutIcon">icons/icons8-info-32.png</file>
+        <file alias="moveUp">icons/icons8-thick-arrow-pointing-down-32.png</file>
+        <file alias="moveDown">icons/icons8-thick-arrow-pointing-up-32.png</file>
+        <file alias="add">icons/icons8-plus-math-32.png</file>
+        <file alias="substract">icons/icons8-subtract-32.png</file>
+        <file alias="delete">icons/icons8-delete-32.png</file>
+    </qresource>
+</RCC>
