@@ -3,11 +3,10 @@
 ITTech::ITTech()
     : Staff()
 {
-    StaffType * type = new StaffType(STAFF_TYPE_IT_TECH);
-    setType(type);
+    setStaffType(STAFF_TYPE_IT_TECH);
 }
 
 ITTech::ITTech(const string lastName, const string firstName, const string login, const string password)
-    : Staff(lastName, firstName, new StaffType(STAFF_TYPE_IT_TECH)), mLogin(login), mPassword(password)
+    : Staff(lastName, firstName, STAFF_TYPE_IT_TECH), mLogin(login), mPassword(password)
 {
 }

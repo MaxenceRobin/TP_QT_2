@@ -1,7 +1,7 @@
 #ifndef ITTECH_H
 #define ITTECH_H
 #include "staff.h"
-#include "stafftype.h"
+#include <stdexcept>
 
 #define STAFF_TYPE_IT_TECH "Informaticien"
 
