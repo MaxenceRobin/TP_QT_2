@@ -21,8 +21,8 @@ AddStaffDialog::AddStaffDialog(QWidget *parent) :
     ui->nameLineEdit->setValidator(nameValidator);
     ui->firstNameLineEdit->setValidator(nameValidator);
 
-    for (int i = 0; i < Staff::NBR_OF_STAFF_TYPES; i++)
-        ui->typeComboBox->addItem(Staff::STRINGS_FROM_STAFF_TYPES[i]);
+    //for (int i = 0; i < Staff::NBR_OF_STAFF_TYPES; i++)
+        //ui->typeComboBox->addItem(Staff::STRINGS_FROM_STAFF_TYPES[i]);
 
     ui->typeComboBox->setCurrentIndex(0);
     on_typeComboBox_currentIndexChanged(ui->typeComboBox->currentIndex());
@@ -36,18 +36,18 @@ void AddStaffDialog::checkBeforeSubmit()
         return;
     }
 
-    if (ui->typeComboBox->currentIndex() == Staff::itTech
+    /*if (ui->typeComboBox->currentIndex() == Staff::itTech
             && (ui->loginLineEdit->text().length() == 0 || ui->passwordLineEdit->text().length() == 0)) {
         QMessageBox::warning(this, "Avertissement", ERROR_MSG_COMPULSORY_INPUT);
         return;
-    }
+    }*/
 
     accept();
 }
 
 void AddStaffDialog::on_typeComboBox_currentIndexChanged(int index)
 {
-    if (index == Staff::itTech) {
+    /*if (index == Staff::itTech) {
         ui->loginLineEdit->setEnabled(true);
         ui->passwordLineEdit->setEnabled(true);
         ui->loginLabel->setEnabled(true);
@@ -59,7 +59,7 @@ void AddStaffDialog::on_typeComboBox_currentIndexChanged(int index)
         ui->passwordLineEdit->setEnabled(false);
         ui->loginLabel->setEnabled(false);
         ui->passwordLabel->setEnabled(false);
-    }
+    }*/
 }
 
 
