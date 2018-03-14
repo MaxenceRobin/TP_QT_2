@@ -24,7 +24,7 @@ public:
     const string getCity() const { return mCity; }
     void setCity(const string city) { mCity = city; }
 
-    const int getPostalCode() const { return mPostalCode; }
+    const int getPostalCode() { return mPostalCode; }
     void setPostalCode(const int postalCode) { mPostalCode = postalCode; }
 };
 
