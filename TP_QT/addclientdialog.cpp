@@ -37,12 +37,30 @@ AddClientDialog::AddClientDialog(QWidget *parent) :
     QRegExp phoneNumRegExp(FR_PHONE_NUMBER_REG_EXP);
     QValidator * phoneNumValidator = new QRegExpValidator(phoneNumRegExp, this);
     ui->phoneNumLineEdit->setValidator(phoneNumValidator);
+
+    if (ui->resourcesListView->selectionModel() == NULL)
+    {
+        ui->moveDownRessourcesButton->setEnabled(false);
+        ui->moveUpRessourcesButton->setEnabled(false);
+        ui->deleteRessourcesButton->setEnabled(false);
+    }
+
+    resourceDialog = new AddResourcesToClientDialog(this);
 }
 
 AddClientDialog::~AddClientDialog()
 {
+    if (resourceDialog != NULL)
+        delete resourceDialog;
     delete ui;
 }
+
+
+void AddClientDialog::addResources()
+{
+    resourceDialog->show();
+}
+
 
 void AddClientDialog::checkBeforeSubmit()
 {

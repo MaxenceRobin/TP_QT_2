@@ -1,7 +1,8 @@
 #ifndef ADDCLIENTDIALOG_H
 #define ADDCLIENTDIALOG_H
-
+#include "addresourcestoclientdialog.h"
 #include <QDialog>
+#include <QListWidget>
 #include <string>
 using namespace std;
 
@@ -19,8 +20,10 @@ public:
 
 private:
     Ui::AddClientDialog *ui;
+    AddResourcesToClientDialog *resourceDialog;
 
 private slots:
+    void addResources();
     void checkBeforeSubmit();
 };
 

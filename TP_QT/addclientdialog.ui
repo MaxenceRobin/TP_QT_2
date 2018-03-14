@@ -33,6 +33,9 @@
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Doit commencer par une majuscule</string>
+         </property>
          <property name="inputMethodHints">
           <set>Qt::ImhLatinOnly</set>
          </property>
@@ -55,6 +58,9 @@
            <width>200</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Doit commencer par une majuscule</string>
          </property>
          <property name="inputMethodHints">
           <set>Qt::ImhLatinOnly</set>
@@ -87,6 +93,9 @@
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Adresse</string>
+         </property>
         </widget>
        </item>
        <item row="1" column="0">
@@ -103,6 +112,9 @@
            <width>400</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Doit commencer par une majuscule</string>
          </property>
          <property name="inputMethodHints">
           <set>Qt::ImhLatinOnly</set>
@@ -123,6 +135,9 @@
            <width>100</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Code postal au format français</string>
          </property>
          <property name="inputMethodHints">
           <set>Qt::ImhDigitsOnly</set>
@@ -147,6 +162,9 @@
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Numéro de téléphone au format français</string>
+         </property>
         </widget>
        </item>
       </layout>
@@ -169,6 +187,9 @@
        </item>
        <item>
         <widget class="QCalendarWidget" name="calendarWidget">
+         <property name="toolTip">
+          <string>Sélectionnez le jour du RDV</string>
+         </property>
          <property name="minimumDate">
           <date>
            <year>1752</year>
@@ -194,6 +215,9 @@
              <width>60</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>Priorité du RDV</string>
            </property>
            <property name="minimum">
             <number>1</number>
@@ -227,6 +251,9 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Durée du RDV</string>
+           </property>
            <property name="suffix">
             <string> min</string>
            </property>
@@ -254,12 +281,15 @@
       </widget>
      </item>
      <item>
-      <widget class="QListView" name="listView"/>
+      <widget class="QListView" name="resourcesListView"/>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QPushButton" name="addResourcesButton">
+         <property name="toolTip">
+          <string>Ajouter des ressources dans la liste</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -271,6 +301,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="moveUpRessourcesButton">
+         <property name="toolTip">
+          <string>Remonter la ressource dans la liste</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -282,6 +315,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="moveDownRessourcesButton">
+         <property name="toolTip">
+          <string>Redescendre la ressource dans la liste</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -293,6 +329,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="deleteRessourcesButton">
+         <property name="toolTip">
+          <string>Supprimer la ressource de la liste</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -359,16 +398,22 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="cancelButton">
+      <widget class="QPushButton" name="okButton">
+       <property name="toolTip">
+        <string>Valider l'ajout du client</string>
+       </property>
        <property name="text">
-        <string>Annuler</string>
+        <string>Valider</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="okButton">
+      <widget class="QPushButton" name="cancelButton">
+       <property name="toolTip">
+        <string>Annuler l'ajout du client</string>
+       </property>
        <property name="text">
-        <string>Valider</string>
+        <string>Annuler</string>
        </property>
       </widget>
      </item>
@@ -393,7 +438,11 @@
   <tabstop>calendarWidget</tabstop>
   <tabstop>rdvDurationSpinBox</tabstop>
   <tabstop>prioritySpinBox</tabstop>
-  <tabstop>listView</tabstop>
+  <tabstop>resourcesListView</tabstop>
+  <tabstop>addResourcesButton</tabstop>
+  <tabstop>moveUpRessourcesButton</tabstop>
+  <tabstop>moveDownRessourcesButton</tabstop>
+  <tabstop>deleteRessourcesButton</tabstop>
   <tabstop>textEdit</tabstop>
   <tabstop>okButton</tabstop>
   <tabstop>cancelButton</tabstop>
@@ -410,7 +459,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>785</x>
-     <y>510</y>
+     <y>541</y>
     </hint>
     <hint type="destinationlabel">
      <x>374</x>
@@ -426,7 +475,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>698</x>
-     <y>510</y>
+     <y>541</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
@@ -434,8 +483,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>addResourcesButton</sender>
+   <signal>clicked()</signal>
+   <receiver>AddClientDialog</receiver>
+   <slot>addResources()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>426</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>checkBeforeSubmit()</slot>
+  <slot>addResources()</slot>
  </slots>
 </ui>
