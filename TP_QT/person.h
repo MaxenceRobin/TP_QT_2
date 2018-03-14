@@ -1,6 +1,6 @@
 #ifndef PERSON_H
 #define PERSON_H
-#include <string>
+#include <QString>
 using namespace std;
 
 #define DEFAULT_NAME "none"
@@ -9,17 +9,17 @@ using namespace std;
 class Person
 {
 private:
-    string mLastName;
-    string mFirstName;
+    QString mLastName;
+    QString mFirstName;
 public:
     Person();
-    Person(const string lastName, const string firstName);
+    Person(const QString lastName, const QString firstName);
 
-    const string getLastName() const { return mLastName; }
-    void setLastName(const string lastName) { mLastName = lastName; }
+    const QString getLastName() const { return mLastName; }
+    void setLastName(const QString lastName) { mLastName = lastName; }
 
-    const string getFirstName() const { return mFirstName; }
-    void setFirstName(const string firstName) { mFirstName = firstName; }
+    const QString getFirstName() const { return mFirstName; }
+    void setFirstName(const QString firstName) { mFirstName = firstName; }
 };
 
 #endif // PERSON_H

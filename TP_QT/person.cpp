@@ -5,7 +5,7 @@ Person::Person()
 {
 }
 
-Person::Person(const string lastName, const string firstName)
+Person::Person(const QString lastName, const QString firstName)
     :mLastName(lastName), mFirstName(firstName)
 {
 }

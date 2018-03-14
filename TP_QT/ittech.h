@@ -8,20 +8,20 @@
 class ITTech : public Staff
 {
 private:
-    string mLogin;
-    string mPassword;
+    QString mLogin;
+    QString mPassword;
 
 public:
     //Constructors
     ITTech();
-    ITTech(const string lastName, const string firstName, const string login, const string password);
+    ITTech(const QString lastName, const QString firstName, const QString login, const QString password);
 
     //Accessors
-    const string getLogin() const { return mLogin; }
-    void setLogin(const string login) { mLogin = login; }
+    const QString getLogin() const { return mLogin; }
+    void setLogin(const QString login) { mLogin = login; }
 
-    void setPassword(const string password) { mPassword = password; }
-    bool checkPassword(const string password) const { return mPassword.compare(password); }
+    void setPassword(const QString password) { mPassword = password; }
+    bool checkPassword(const QString password) const { return mPassword.compare(password); }
 
 };
 

@@ -8,15 +8,15 @@
 class Staff : public Person
 {
 private:
-    string mStaffType;
+    QString mStaffType;
 public:
     //Constructors
     Staff();
-    Staff(const string lastName, const string firstName, const string staffType);
+    Staff(const QString lastName, const QString firstName, const QString staffType);
 
     //Accessors
-    const string getStaffType() const { return mStaffType; }
-    void setStaffType(const string staffType) { mStaffType = staffType; }
+    const QString getStaffType() const { return mStaffType; }
+    void setStaffType(const QString staffType) { mStaffType = staffType; }
 };
 
 #endif // STAFF_H

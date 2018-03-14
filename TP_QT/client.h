@@ -6,23 +6,23 @@
 class Client : public Person
 {
 private:
-    string mAddress;
-    string mCity;
+    QString mAddress;
+    QString mCity;
     int mPostalCode;
     int mPhoneNumber;
 
 public:
     //Constructors
     Client();
-    Client(const string lastName, const string firstName, const string address,
-           const string city, const int postalCode, const int phoneNumber);
+    Client(const QString lastName, const QString firstName, const QString address,
+           const QString city, const int postalCode, const int phoneNumber);
 
     //Accessors
-    const string getAddress() const { return mAddress; }
-    void setAddress(const string address) { mAddress = address; }
+    const QString getAddress() const { return mAddress; }
+    void setAddress(const QString address) { mAddress = address; }
 
-    const string getCity() const { return mCity; }
-    void setCity(const string city) { mCity = city; }
+    const QString getCity() const { return mCity; }
+    void setCity(const QString city) { mCity = city; }
 
     const int getPostalCode() { return mPostalCode; }
     void setPostalCode(const int postalCode) { mPostalCode = postalCode; }
