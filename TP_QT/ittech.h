@@ -1,7 +1,9 @@
 #ifndef ITTECH_H
 #define ITTECH_H
 #include "staff.h"
+#include "stafftype.h"
 
+#define STAFF_TYPE_IT_TECH "Informaticien"
 
 class ITTech : public Staff
 {

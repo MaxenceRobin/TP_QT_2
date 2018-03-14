@@ -3,6 +3,8 @@
 #include <string>
 using namespace std;
 
+#define DEFAULT_NAME "none"
+
 
 class Person
 {

@@ -34,7 +34,9 @@ SOURCES += \
     client.cpp \
     person.cpp \
     staff.cpp \
-    ittech.cpp
+    ittech.cpp \
+    addresourcestoclientdialog.cpp \
+    stafftype.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,14 +48,17 @@ HEADERS += \
     client.h \
     person.h \
     staff.h \
-    ittech.h
+    ittech.h \
+    addresourcestoclientdialog.h \
+    stafftype.h
 
 FORMS += \
         mainwindow.ui \
     logindialog.ui \
     addclientdialog.ui \
     addstaffdialog.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    addresourcestoclientdialog.ui
 
 RESOURCES += \
     ressources.qrc
