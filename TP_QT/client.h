@@ -26,13 +26,13 @@ public:
            const QString city, const int postalCode, const int phoneNumber);
 
     //Accessors
-    const QString getAddress() const { return mAddress; }
-    void setAddress(const QString address) { mAddress = address; }
+    const QString & getAddress() const { return mAddress; }
+    void setAddress(const QString & address) { mAddress = address; }
 
-    const QString getCity() const { return mCity; }
-    void setCity(const QString city) { mCity = city; }
+    const QString & getCity() const { return mCity; }
+    void setCity(const QString & city) { mCity = city; }
 
-    const int getPostalCode() { return mPostalCode; }
+    int getPostalCode() { return mPostalCode; }
     void setPostalCode(const int postalCode) { mPostalCode = postalCode; }
 
     const QDate getAppointmentDay() const { return mAppointmentDay; }
