@@ -7,6 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->statusBar->showMessage("Vous êtes connecté.");
+
+    ui->fromDateSearchDateEdit->setDate(QDate::currentDate());
+    ui->toDateSearchDateEdit->setMinimumDate(ui->fromDateSearchDateEdit->date());
+    ui->toDateSearchDateEdit->setDate(QDate::currentDate());
 }
 
 MainWindow::~MainWindow()
@@ -42,4 +46,10 @@ void MainWindow::showAboutDialog()
 {
     AboutDialog aboutDialog;
     aboutDialog.exec();
+}
+
+void MainWindow::on_fromDateSearchDateEdit_userDateChanged(const QDate &date)
+{
+    ui->toDateSearchDateEdit->setMinimumDate(ui->fromDateSearchDateEdit->date());
+    ui->toDateSearchDateEdit->setDate(QDate::currentDate());
 }

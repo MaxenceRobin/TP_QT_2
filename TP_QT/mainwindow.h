@@ -23,6 +23,8 @@ private slots:
     void showAddStaffDialog();
     void showAboutDialog();
 
+    void on_fromDateSearchDateEdit_userDateChanged(const QDate &date);
+
 private:
     Ui::MainWindow *ui;
 };

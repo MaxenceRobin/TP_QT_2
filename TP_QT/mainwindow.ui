@@ -345,6 +345,16 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>fromDateSearchDateEdit</tabstop>
+  <tabstop>toDateSearchDateEdit</tabstop>
+  <tabstop>lastNameSearchLineEdit</tabstop>
+  <tabstop>firstNameSearchLineEdit</tabstop>
+  <tabstop>idSearchLineEdit</tabstop>
+  <tabstop>searchPushButton</tabstop>
+  <tabstop>clientTableView</tabstop>
+ </tabstops>
  <resources>
   <include location="ressources.qrc"/>
  </resources>
