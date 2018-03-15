@@ -36,7 +36,8 @@ SOURCES += \
     staff.cpp \
     ittech.cpp \
     addresourcestoclientdialog.cpp \
-    c_init_bd.cpp
+    c_init_bd.cpp \
+    dbmanager.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,7 +51,8 @@ HEADERS += \
     staff.h \
     ittech.h \
     addresourcestoclientdialog.h \
-    c_init_bd.h
+    c_init_bd.h \
+    dbmanager.h
 
 FORMS += \
         mainwindow.ui \
