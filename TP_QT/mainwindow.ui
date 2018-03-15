@@ -38,7 +38,7 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <layout class="QHBoxLayout" name="dateSearchFiltersLayout">
             <property name="spacing">
              <number>20</number>
             </property>
@@ -86,7 +86,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <layout class="QHBoxLayout" name="textSearchFiltersLayout">
             <property name="spacing">
              <number>7</number>
             </property>
@@ -237,11 +237,14 @@
            </widget>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <widget class="QTableView" name="clientTableView"/>
-            </item>
-           </layout>
+           <widget class="QTableView" name="clientTableView">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -353,7 +356,6 @@
   <tabstop>firstNameSearchLineEdit</tabstop>
   <tabstop>idSearchLineEdit</tabstop>
   <tabstop>searchPushButton</tabstop>
-  <tabstop>clientTableView</tabstop>
  </tabstops>
  <resources>
   <include location="ressources.qrc"/>
