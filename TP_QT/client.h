@@ -1,6 +1,10 @@
 #ifndef CLIENT_H
 #define CLIENT_H
+
 #include "person.h"
+
+#include <QDate>
+#include <QString>
 
 
 class Client : public Person
@@ -8,8 +12,12 @@ class Client : public Person
 private:
     QString mAddress;
     QString mCity;
-    int mPostalCode;
-    int mPhoneNumber;
+    unsigned int mPostalCode;
+    unsigned int mPhoneNumber;
+    QDate mAppointmentDay;
+    unsigned int mAppointmentDuration;
+    unsigned int mPriority;
+    QString mComment;
 
 public:
     //Constructors
@@ -26,6 +34,18 @@ public:
 
     const int getPostalCode() { return mPostalCode; }
     void setPostalCode(const int postalCode) { mPostalCode = postalCode; }
+
+    const QDate getAppointmentDay() const { return mAppointmentDay; }
+    void setAppointDay(const QDate appointmentDay) { mAppointmentDay = appointmentDay; }
+
+    unsigned int getAppiontmentDuration() const { return mAppointmentDuration; }
+    void setAppointmentDuration(const unsigned int appointmentDuration) { mAppointmentDuration = appointmentDuration; }
+
+    unsigned int getPriority() const { return mPriority; }
+    void setPriority(const unsigned int priority) { mPriority = priority; }
+
+    const QString & getComment() const { return mComment; }
+    void setComment(const QString & comment) { mComment = comment; }
 };
 
 #endif // CLIENT_H
