@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "logindialog.h"
+#include "c_init_bd.h"
+
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -10,6 +12,7 @@ int main(int argc, char *argv[])
 
     if (d.exec() == QDialog::Accepted)
     {
+        C_INIT_BD::Creation_BD();
         w.show();
         return a.exec();
     }
