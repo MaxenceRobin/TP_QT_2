@@ -50,6 +50,7 @@ void MainWindow::showAboutDialog()
 
 void MainWindow::on_fromDateSearchDateEdit_userDateChanged(const QDate &date)
 {
-    ui->toDateSearchDateEdit->setMinimumDate(ui->fromDateSearchDateEdit->date());
-    ui->toDateSearchDateEdit->setDate(QDate::currentDate());
+    if (ui->toDateSearchDateEdit->date() < date)
+        ui->toDateSearchDateEdit->setDate(date);
+    ui->toDateSearchDateEdit->setMinimumDate(date);
 }
