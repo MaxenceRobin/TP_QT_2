@@ -37,3 +37,4 @@ Makefile*
 # QtCtreator CMake
 CMakeLists.txt.user*
 
+TP_QT/TP_QT.pro.user
