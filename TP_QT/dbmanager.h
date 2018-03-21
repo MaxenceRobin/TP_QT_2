@@ -10,15 +10,21 @@
 
 class DBManager
 {
+private:
+    static int getMaxId(QString tableName);
 public:
     DBManager();
 
     static QSqlQueryModel * getClientsModel();
-    static QSqlQueryModel * getRessourcesModel();
+    static QSqlQueryModel * getResourcesModel();
 
     static void addClient(const Client & client);
     static void addRessource(const Resource &resource);
     static void addITTech(const ITTech &itTech);
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 
 private:
 
