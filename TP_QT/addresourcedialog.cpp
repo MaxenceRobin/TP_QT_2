@@ -28,7 +28,7 @@ AddResourceDialog::AddResourceDialog(QWidget *parent) :
     ui->typeComboBox->addItem("Assureur");
 
     ui->typeComboBox->setCurrentIndex(0);
-    on_typeComboBox_currentIndexChanged(ui->typeComboBox->currentIndex());
+    on_typeComboBox_currentIndexChanged();
 }
 
 
@@ -48,7 +48,7 @@ void AddResourceDialog::checkBeforeSubmit()
     accept();
 }
 
-void AddResourceDialog::on_typeComboBox_currentIndexChanged(int index)
+void AddResourceDialog::on_typeComboBox_currentIndexChanged()
 {
     if (ui->typeComboBox->currentText() == ITTech::RESOURCE_TYPE_IT_TECH)
     {
