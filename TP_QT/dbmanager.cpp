@@ -63,16 +63,14 @@ QSqlQueryModel * DBManager::getResourcesModel()
 void DBManager::addClient(const Client & client)
 {
     SelfManagedDatabase database;
-}
 
-<<<<<<< HEAD
     if (database.isOpen())
     {
         QSqlQuery addClientQuery;
 
         addClientQuery.prepare(
                     "insert into TClient "
-                    "(Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateRdv, DureeRdv, Priotie) "
+                    "(Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateRdv, DureeRdv, Priorite) "
                     "values "
                     "(:nom, :prenom, :adresse, :ville, :cp, :commentaire, :tel, :date, :duree, :priorite)"
                     );
@@ -92,9 +90,6 @@ void DBManager::addClient(const Client & client)
     }
 }
 
-=======
-
->>>>>>> origin/master
 void DBManager::addRessource(const Resource &resource)
 {
     SelfManagedDatabase database;
@@ -160,7 +155,3 @@ void DBManager::addITTech(const ITTech &itTech)
         addResourceQuery.exec();
     }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
