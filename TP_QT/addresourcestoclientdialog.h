@@ -2,6 +2,7 @@
 #define ADDRESOURCESTOCLIENTDIALOG_H
 
 #include <QDialog>
+#include "resource.h"
 
 namespace Ui {
 class AddResourcesToClientDialog;
@@ -20,6 +21,11 @@ private:
 
 private slots:
     void refreshResourcesTableView();
+    void createResourcesList();
+
+signals:
+
+    void newRessources(QList<Resource> resources);
 };
 
 #endif // ADDRESOURCESTOCLIENTDIALOG_H
