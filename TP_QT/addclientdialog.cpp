@@ -1,6 +1,8 @@
 #include "addclientdialog.h"
 #include "ui_addclientdialog.h"
 #include "qmessagebox.h"
+#include "resource.h"
+#include "dbmanager.h"
 
 //Regular expression to control inputs
 #define NAME_REG_EXP "[A-Z][a-z]*((-|\\s)[A-Z][a-z]*)*"
@@ -18,8 +20,8 @@ AddClientDialog::AddClientDialog(QWidget *parent) :
     ui(new Ui::AddClientDialog)
 {
     ui->setupUi(this);
-    ui->calendarWidget->setSelectedDate(QDate::currentDate());
-    ui->calendarWidget->setMinimumDate(QDate::currentDate());
+    ui->appointmentDayCalendar->setSelectedDate(QDate::currentDate());
+    ui->appointmentDayCalendar->setMinimumDate(QDate::currentDate());
 
     //Checks the input of a correct name
     QRegExp nameRegExp(NAME_REG_EXP);
@@ -77,5 +79,20 @@ void AddClientDialog::checkBeforeSubmit()
         QMessageBox::warning(this, "Avertissement", ERROR_MSG_PHONE_NUMBER_INPUT);
         return;
     }
+
+    Client client(ui->nameLineEdit->text(),
+                  ui->firstNameLineEdit->text(),
+                  ui->addressLineEdit->text(),
+                  ui->cityLineEdit->text(),
+                  ui->postalCodeLineEdit->text().toInt(),
+                  ui->commentTextEdit->toPlainText(),
+                  ui->phoneNumLineEdit->text().toInt(),
+                  ui->appointmentDayCalendar->selectedDate(),
+                  ui->rdvDurationSpinBox->value(),
+                  ui->prioritySpinBox->value(),
+                  QList<Resource>() << Resource("Bonjour", "connard", "de merde"));
+
+    DBManager::addClient(client);
+
     accept();
 }

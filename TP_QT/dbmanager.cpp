@@ -18,7 +18,7 @@ QSqlQueryModel * DBManager::getClientsModel()
         QSqlQueryModel * model = new QSqlQueryModel;
 
         model->setQuery(
-                    "select Nom, Prenom "
+                    "select * "
                     "from TClient"
                     );
 
@@ -52,13 +52,32 @@ void DBManager::addClient(const Client & client)
 {
     SelfManagedDatabase database;
 
-<<<<<<< HEAD
     if (database.isOpen())
     {
+        QSqlQuery addClientQuery;
 
+        addClientQuery.prepare(
+                    "insert into TClient "
+                    "(Nom, Prenom, Adresse, Ville, CP, Commentaire, Tel, DateRdv, DureeRdv, Priotie) "
+                    "values "
+                    "(:nom, :prenom, :adresse, :ville, :cp, :commentaire, :tel, :date, :duree, :priorite)"
+                    );
+
+        addClientQuery.bindValue(":nom", client.getLastName());
+        addClientQuery.bindValue(":prenom", client.getFirstName());
+        addClientQuery.bindValue(":adresse", client.getAddress());
+        addClientQuery.bindValue(":ville", client.getCity());
+        addClientQuery.bindValue(":cp", client.getPostalCode());
+        addClientQuery.bindValue(":commentaire", client.getComment());
+        addClientQuery.bindValue(":tel", client.getPhoneNumber());
+        addClientQuery.bindValue(":date", client.getAppointmentDay());
+        addClientQuery.bindValue(":duree", client.getAppointmentDuration());
+        addClientQuery.bindValue(":priorite", client.getPriority());
+
+        addClientQuery.exec();
     }
 }
-=======
+
 void DBManager::addRessource(const Resource &resource)
 {
     SelfManagedDatabase database;
@@ -123,4 +142,3 @@ void DBManager::addITTech(const ITTech &itTech)
     }
 }
 
->>>>>>> origin/master

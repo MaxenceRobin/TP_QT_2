@@ -186,7 +186,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QCalendarWidget" name="calendarWidget">
+        <widget class="QCalendarWidget" name="appointmentDayCalendar">
          <property name="toolTip">
           <string>Sélectionnez le jour du RDV</string>
          </property>
@@ -371,7 +371,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="textEdit"/>
+      <widget class="QTextEdit" name="commentTextEdit"/>
      </item>
     </layout>
    </item>
@@ -435,7 +435,7 @@
   <tabstop>cityLineEdit</tabstop>
   <tabstop>postalCodeLineEdit</tabstop>
   <tabstop>phoneNumLineEdit</tabstop>
-  <tabstop>calendarWidget</tabstop>
+  <tabstop>appointmentDayCalendar</tabstop>
   <tabstop>rdvDurationSpinBox</tabstop>
   <tabstop>prioritySpinBox</tabstop>
   <tabstop>resourcesListView</tabstop>
@@ -443,7 +443,7 @@
   <tabstop>moveUpRessourcesButton</tabstop>
   <tabstop>moveDownRessourcesButton</tabstop>
   <tabstop>deleteRessourcesButton</tabstop>
-  <tabstop>textEdit</tabstop>
+  <tabstop>commentTextEdit</tabstop>
   <tabstop>okButton</tabstop>
   <tabstop>cancelButton</tabstop>
  </tabstops>
