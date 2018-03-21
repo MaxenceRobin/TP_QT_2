@@ -72,7 +72,7 @@ void DBManager::addRessource(const Resource &resource)
         addResourceQuery.bindValue(":nom", resource.getLastName());
         addResourceQuery.bindValue(":prenom", resource.getFirstName());
         addResourceQuery.bindValue(":idType", resourceTypeId);
-        query.exec();
+        addResourceQuery.exec();
     }
 }
 
@@ -84,7 +84,7 @@ void DBManager::addITTech(const ITTech &itTech)
     if (database.isOpen())
     {
         QSqlQuery getResourceTypeIdQuery;
-        int resourceId;
+        int resourceTypeId;
         getResourceTypeIdQuery.prepare(
                     "SELECT Id "
                     "FROM TType "
@@ -101,7 +101,7 @@ void DBManager::addITTech(const ITTech &itTech)
         addResourceQuery.bindValue(":prenom", itTech.getFirstName());
         addResourceQuery.bindValue(":idType", resourceTypeId);
         addResourceQuery.exec();
-        resourceId = addResourceQuery.lastInsertId();
+        resourceId = addResourceQuery.lastInsertId().toInt();
 
         QSqlQuery addAccountQuery;
         addAccountQuery.prepare("INSERT INTO TCompte (IdRessource, Login, MdP) "
