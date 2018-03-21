@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    if (ui->clientTableView->model() != nullptr)
+        delete ui->clientTableView->model();
     delete ui;
 }
 
