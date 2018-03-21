@@ -87,6 +87,43 @@ void DBManager::addClient(const Client & client)
         addClientQuery.bindValue(":priorite", client.getPriority());
 
         addClientQuery.exec();
+
+        for (const Resource & resource : client.getResources())
+        {
+            QSqlQuery resourceIdQuery;
+
+            resourceIdQuery.prepare(
+                        "select R.Id "
+                        "from TRessource R, TType T "
+                        "where R.IdType = T.Id "
+                        "and R.Nom = :nom "
+                        "and R.Prenom = :prenom "
+                        "and T.Label = :label"
+                        );
+
+            resourceIdQuery.bindValue(":nom", resource.getLastName());
+            resourceIdQuery.bindValue(":prenom", resource.getFirstName());
+            resourceIdQuery.bindValue(":label", resource.getStaffType());
+
+            resourceIdQuery.exec();
+
+            resourceIdQuery.next();
+            unsigned int resourceId = resourceIdQuery.value(0).toInt();
+
+            QSqlQuery addRdvQuery;
+
+            addRdvQuery.prepare(
+                        "insert into TRdv "
+                        "(IdClient, IdRessource) "
+                        "values "
+                        "(:client, :ressource)"
+                        );
+
+            addRdvQuery.bindValue(":client", client.getId());
+            addRdvQuery.bindValue(":ressource", resourceId);
+
+            addRdvQuery.exec();
+        }
     }
 }
 
