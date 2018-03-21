@@ -24,13 +24,7 @@ AddResourceDialog::AddResourceDialog(QWidget *parent) :
     ui->nameLineEdit->setValidator(nameValidator);
     ui->firstNameLineEdit->setValidator(nameValidator);
 
-    ui->typeComboBox->addItem("Banquier A");
-    ui->typeComboBox->addItem("Banquier B");
-    ui->typeComboBox->addItem("Assureur Logement");
-    ui->typeComboBox->addItem("Assureur Voiture");
-    ui->typeComboBox->addItem("Assureur Vie");
-    ui->typeComboBox->addItem("Divers");
-    ui->typeComboBox->addItem("Informaticien");
+    ui->typeComboBox->setModel(DBManager::getResourcesTypesModel());
 
     ui->typeComboBox->setCurrentIndex(0);
     on_typeComboBox_currentIndexChanged();
@@ -87,6 +81,8 @@ void AddResourceDialog::on_typeComboBox_currentIndexChanged()
 
 AddResourceDialog::~AddResourceDialog()
 {
+    if (ui->typeComboBox->model() != nullptr)
+        delete ui->typeComboBox->model();
     delete ui;
 }
 

@@ -15,8 +15,11 @@ private:
 public:
     DBManager();
 
+    static const int INDEX_TYPE_COL_RESOURCES_TYPES_MODEL;
+
     static QSqlQueryModel * getClientsModel();
     static QSqlQueryModel * getResourcesModel();
+    static QSqlQueryModel * getResourcesTypesModel();
 
     static void addClient(const Client & client);
     static void addRessource(const Resource &resource);

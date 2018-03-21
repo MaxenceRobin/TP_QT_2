@@ -31,13 +31,13 @@
           <widget class="QComboBox" name="resourceTypeComboBox">
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>200</width>
              <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>200</width>
              <height>16777215</height>
             </size>
            </property>
@@ -55,13 +55,6 @@
             </size>
            </property>
           </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="refreshButton">
-           <property name="text">
-            <string> Rafraîchir</string>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>
@@ -131,22 +124,6 @@
     <hint type="sourcelabel">
      <x>362</x>
      <y>329</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>207</x>
-     <y>177</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>refreshButton</sender>
-   <signal>clicked()</signal>
-   <receiver>AddResourcesToClientDialog</receiver>
-   <slot>refreshResourcesTableView()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>361</x>
-     <y>26</y>
     </hint>
     <hint type="destinationlabel">
      <x>207</x>

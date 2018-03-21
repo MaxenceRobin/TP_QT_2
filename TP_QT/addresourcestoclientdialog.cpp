@@ -2,7 +2,10 @@
 #include "ui_addresourcestoclientdialog.h"
 #include "dbmanager.h"
 
+<<<<<<< HEAD
 #include <QDebug>
+=======
+>>>>>>> origin/master
 
 AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
     QDialog(parent),
@@ -10,6 +13,7 @@ AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+<<<<<<< HEAD
     ui->resourcesTableView->setModel(DBManager::getResourcesModel());
 
     connect(ui->addButton, SIGNAL(clicked(bool)), this, SLOT(createResourcesList()));
@@ -18,21 +22,61 @@ AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
 //        ui->addButton->setEnabled(false);
 
     //refreshResourcesTableView();
+=======
+    resourcesModel = DBManager::getResourcesModel();
+
+    resourcesProxyModel = new QSortFilterProxyModel();
+    resourcesProxyModel->setSourceModel(resourcesModel);
+    //Filters on the resource type column
+    resourcesProxyModel->setFilterKeyColumn(DBManager::INDEX_TYPE_COL_RESOURCES_TYPES_MODEL);
+    ui->resourcesTableView->setModel(resourcesProxyModel);
+    ui->resourcesTableView->setSortingEnabled(true);
+
+    resourcesTypesModel = DBManager::getResourcesTypesModel();
+    ui->resourceTypeComboBox->setModel(resourcesTypesModel);
+
+    //The user can't add a resource if none is selected
+    if (!ui->resourcesTableView->selectionModel()->hasSelection())
+        ui->addButton->setEnabled(false);
+>>>>>>> origin/master
 }
 
 AddResourcesToClientDialog::~AddResourcesToClientDialog()
 {
+    if (resourcesTypesModel != nullptr)
+        delete resourcesTypesModel;
+    if (resourcesModel != nullptr)
+        delete resourcesModel;
+    if (resourcesProxyModel != nullptr)
+        delete resourcesProxyModel;
     delete ui;
 }
 
-void AddResourcesToClientDialog::refreshResourcesTableView()
+void AddResourcesToClientDialog::on_resourceTypeComboBox_currentIndexChanged(const QString &resourceType)
 {
+<<<<<<< HEAD
     if (ui->resourcesTableView->model() != nullptr)
     {
         delete ui->resourcesTableView->model();
     }
 
     ui->resourcesTableView->setModel(DBManager::getResourcesModel());
+=======
+    //Filters by
+    resourcesProxyModel->setFilterRegExp(resourceType);
+    //Resets the selection
+    ui->resourcesTableView->selectionModel()->clear();
+    ui->addButton->setEnabled(false);
+}
+
+void AddResourcesToClientDialog::on_resourcesTableView_clicked(const QModelIndex &index)
+{
+    //Checks if a resource if selected to allow to click on addButton
+    if (ui->resourcesTableView->selectionModel()->hasSelection())
+        ui->addButton->setEnabled(true);
+    else
+        ui->addButton->setEnabled(false);
+>>>>>>> origin/master
 }
 
 void AddResourcesToClientDialog::createResourcesList()

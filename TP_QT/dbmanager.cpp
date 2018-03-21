@@ -10,6 +10,7 @@ DBManager::DBManager()
 {
 }
 
+const int DBManager::INDEX_TYPE_COL_RESOURCES_TYPES_MODEL = 2;
 
 int DBManager::getMaxId(QString tableName)
 {
@@ -59,6 +60,22 @@ QSqlQueryModel * DBManager::getResourcesModel()
 
     return new QSqlQueryModel;
 }
+
+
+QSqlQueryModel * DBManager::getResourcesTypesModel()
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQueryModel * model = new QSqlQueryModel;
+
+        model->setQuery("SELECT Label FROM TType");
+        return model;
+    }
+    return new QSqlQueryModel;
+}
+
 
 void DBManager::addClient(const Client & client)
 {
