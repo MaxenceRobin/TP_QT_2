@@ -2,10 +2,7 @@
 #include "ui_addresourcestoclientdialog.h"
 #include "dbmanager.h"
 
-<<<<<<< HEAD
 #include <QDebug>
-=======
->>>>>>> origin/master
 
 AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
     QDialog(parent),
@@ -13,16 +10,12 @@ AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-<<<<<<< HEAD
-    ui->resourcesTableView->setModel(DBManager::getResourcesModel());
-
     connect(ui->addButton, SIGNAL(clicked(bool)), this, SLOT(createResourcesList()));
 
 //    if (ui->resourcesTableView->selectionModel() == NULL)
 //        ui->addButton->setEnabled(false);
 
     //refreshResourcesTableView();
-=======
     resourcesModel = DBManager::getResourcesModel();
 
     resourcesProxyModel = new QSortFilterProxyModel();
@@ -38,7 +31,6 @@ AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
     //The user can't add a resource if none is selected
     if (!ui->resourcesTableView->selectionModel()->hasSelection())
         ui->addButton->setEnabled(false);
->>>>>>> origin/master
 }
 
 AddResourcesToClientDialog::~AddResourcesToClientDialog()
@@ -54,14 +46,13 @@ AddResourcesToClientDialog::~AddResourcesToClientDialog()
 
 void AddResourcesToClientDialog::on_resourceTypeComboBox_currentIndexChanged(const QString &resourceType)
 {
-<<<<<<< HEAD
-    if (ui->resourcesTableView->model() != nullptr)
-    {
-        delete ui->resourcesTableView->model();
-    }
+//    if (ui->resourcesTableView->model() != nullptr)
+//    {
+//        delete ui->resourcesTableView->model();
+//    }
 
-    ui->resourcesTableView->setModel(DBManager::getResourcesModel());
-=======
+//    ui->resourcesTableView->setModel(DBManager::getResourcesModel());
+
     //Filters by
     resourcesProxyModel->setFilterRegExp(resourceType);
     //Resets the selection
@@ -76,7 +67,6 @@ void AddResourcesToClientDialog::on_resourcesTableView_clicked(const QModelIndex
         ui->addButton->setEnabled(true);
     else
         ui->addButton->setEnabled(false);
->>>>>>> origin/master
 }
 
 void AddResourcesToClientDialog::createResourcesList()
