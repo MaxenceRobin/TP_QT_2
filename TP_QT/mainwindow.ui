@@ -277,7 +277,7 @@
       <string>Ajouter</string>
      </property>
      <addaction name="addClientAction"/>
-     <addaction name="addStaffAction"/>
+     <addaction name="addResourceAction"/>
     </widget>
     <addaction name="addMenu"/>
     <addaction name="separator"/>
@@ -300,7 +300,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="addClientAction"/>
-   <addaction name="addStaffAction"/>
+   <addaction name="addResourceAction"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="quitAction">
@@ -325,13 +325,13 @@
     <string>Ajouter Client</string>
    </property>
   </action>
-  <action name="addStaffAction">
+  <action name="addResourceAction">
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/addStaffIcon</normaloff>:/addStaffIcon</iconset>
    </property>
    <property name="text">
-    <string>Personnel</string>
+    <string>Ressource</string>
    </property>
    <property name="toolTip">
     <string>Ajouter Personnel</string>
@@ -378,10 +378,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>addStaffAction</sender>
+   <sender>addResourceAction</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>showAddStaffDialog()</slot>
+   <slot>showAddResourceDialog()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -428,7 +428,7 @@
  </connections>
  <slots>
   <slot>showAddClientDialog()</slot>
-  <slot>showAddStaffDialog()</slot>
+  <slot>showAddResourceDialog()</slot>
   <slot>showAboutDialog()</slot>
  </slots>
 </ui>

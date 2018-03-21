@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "addclientdialog.h"
-#include "addstaffdialog.h"
+#include "addresourcedialog.h"
 #include "aboutdialog.h"
 
 namespace Ui {
@@ -20,7 +20,7 @@ public:
 
 private slots:
     void showAddClientDialog();
-    void showAddStaffDialog();
+    void showAddResourceDialog();
     void showAboutDialog();
 
     void on_fromDateSearchDateEdit_userDateChanged(const QDate &date);

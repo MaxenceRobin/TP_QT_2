@@ -2,6 +2,8 @@
 #define DBMANAGER_H
 
 #include "client.h"
+#include "resource.h"
+#include "ittech.h"
 
 #include <QSqlQueryModel>
 
@@ -11,6 +13,8 @@ public:
     DBManager();
 
     static QSqlQueryModel * getClientsModel();
+
+    static void addRessource(const Resource & resource);
 
 private:
 

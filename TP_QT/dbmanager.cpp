@@ -58,3 +58,5 @@ QSqlQueryModel * DBManager::getClientsModel()
 
     return new QSqlQueryModel;
 }
+
+

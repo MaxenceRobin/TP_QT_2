@@ -1,10 +1,10 @@
 #ifndef ITTECH_H
 #define ITTECH_H
-#include "staff.h"
+#include "resource.h"
 #include <stdexcept>
 
 
-class ITTech : public Staff
+class ITTech : public Resource
 {
 private:
     QString mLogin;

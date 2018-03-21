@@ -29,40 +29,40 @@ SOURCES += \
     logindialog.cpp \
     authentificationcontroller.cpp \
     addclientdialog.cpp \
-    addstaffdialog.cpp \
     aboutdialog.cpp \
     client.cpp \
     person.cpp \
-    staff.cpp \
     ittech.cpp \
     addresourcestoclientdialog.cpp \
     c_init_bd.cpp \
     dbmanager.cpp \
-    selfmanageddatabase.cpp
+    selfmanageddatabase.cpp \
+    resource.cpp \
+    addresourcedialog.cpp
 
 HEADERS += \
         mainwindow.h \
     logindialog.h \
     authentificationcontroller.h \
     addclientdialog.h \
-    addstaffdialog.h \
     aboutdialog.h \
     client.h \
     person.h \
-    staff.h \
     ittech.h \
     addresourcestoclientdialog.h \
     c_init_bd.h \
     dbmanager.h \
-    selfmanageddatabase.h
+    selfmanageddatabase.h \
+    resource.h \
+    addresourcedialog.h
 
 FORMS += \
         mainwindow.ui \
     logindialog.ui \
     addclientdialog.ui \
-    addstaffdialog.ui \
     aboutdialog.ui \
-    addresourcestoclientdialog.ui
+    addresourcestoclientdialog.ui \
+    addresourcedialog.ui
 
 RESOURCES += \
     ressources.qrc

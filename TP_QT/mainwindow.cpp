@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->fromDateSearchDateEdit->setDate(QDate::currentDate());
     ui->toDateSearchDateEdit->setMinimumDate(ui->fromDateSearchDateEdit->date());
     ui->toDateSearchDateEdit->setDate(QDate::currentDate());
+
+    ui->clientTableView->setModel(DBManager::getClientsModel());
 }
 
 MainWindow::~MainWindow()
@@ -35,9 +37,9 @@ void MainWindow::showAddClientDialog()
 }
 
 
-void MainWindow::showAddStaffDialog()
+void MainWindow::showAddResourceDialog()
 {
-    AddStaffDialog staffDialog(this);
+    AddResourceDialog staffDialog(this);
     if (staffDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un personnel.");
