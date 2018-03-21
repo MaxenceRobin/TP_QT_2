@@ -9,10 +9,15 @@ AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
     ui->setupUi(this);
     if (ui->resourcesTableView->selectionModel() == NULL)
         ui->addButton->setEnabled(false);
-    ui->resourcesTableView->setModel(DBManager::getResourcesModel());
+    refreshResourcesTableView();
 }
 
 AddResourcesToClientDialog::~AddResourcesToClientDialog()
 {
     delete ui;
+}
+
+void AddResourcesToClientDialog::refreshResourcesTableView()
+{
+    ui->resourcesTableView->setModel(DBManager::getResourcesModel());
 }

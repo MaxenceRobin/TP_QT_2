@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::AddResourcesToClientDialog *ui;
+
+private slots:
+    void refreshResourcesTableView();
 };
 
 #endif // ADDRESOURCESTOCLIENTDIALOG_H

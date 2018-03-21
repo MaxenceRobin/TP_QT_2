@@ -3,6 +3,7 @@
 #include "qmessagebox.h"
 #include "resource.h"
 #include "ittech.h"
+#include "dbmanager.h"
 
 //Regular expression to control inputs
 #define NAME_REG_EXP "[A-Z][a-z]*((-|\\s)[A-Z][a-z]*)*"
@@ -23,9 +24,13 @@ AddResourceDialog::AddResourceDialog(QWidget *parent) :
     ui->nameLineEdit->setValidator(nameValidator);
     ui->firstNameLineEdit->setValidator(nameValidator);
 
-    ui->typeComboBox->addItem("Banquier");
+    ui->typeComboBox->addItem("Banquier A");
+    ui->typeComboBox->addItem("Banquier B");
+    ui->typeComboBox->addItem("Assureur Logement");
+    ui->typeComboBox->addItem("Assureur Voiture");
+    ui->typeComboBox->addItem("Assureur Vie");
+    ui->typeComboBox->addItem("Divers");
     ui->typeComboBox->addItem("Informaticien");
-    ui->typeComboBox->addItem("Assureur");
 
     ui->typeComboBox->setCurrentIndex(0);
     on_typeComboBox_currentIndexChanged();
@@ -43,6 +48,19 @@ void AddResourceDialog::checkBeforeSubmit()
             && (ui->loginLineEdit->text().length() == 0 || ui->passwordLineEdit->text().length() == 0)) {
         QMessageBox::warning(this, "Avertissement", ERROR_MSG_COMPULSORY_INPUT);
         return;
+    }
+
+    if (ui->typeComboBox->currentText() == ITTech::RESOURCE_TYPE_IT_TECH) {
+        ITTech itTech(ui->nameLineEdit->text(), ui->firstNameLineEdit->text(),
+                      ui->loginLineEdit->text(), ui->passwordLineEdit->text());
+
+        DBManager::addITTech(itTech);
+    }
+    else
+    {
+        Resource resource(ui->nameLineEdit->text(), ui->firstNameLineEdit->text(), ui->typeComboBox->currentText());
+
+        DBManager::addRessource(resource);
     }
 
     accept();

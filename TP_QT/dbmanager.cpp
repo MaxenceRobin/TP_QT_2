@@ -4,10 +4,22 @@
 
 #include <QSqlQuery>
 #include <QDebug>
+#include <QSqlError>
 
 DBManager::DBManager()
 {
 }
+
+
+int DBManager::getMaxId(QString tableName)
+{
+    QString queryString = ("SELECT MAX(Id) FROM " + tableName);
+    QSqlQuery query(queryString);
+    query.first();
+    qDebug() << query.lastError();
+    return query.value(0).toInt();
+}
+
 
 QSqlQueryModel * DBManager::getClientsModel()
 {
@@ -51,19 +63,10 @@ QSqlQueryModel * DBManager::getResourcesModel()
 void DBManager::addClient(const Client & client)
 {
     SelfManagedDatabase database;
-
-<<<<<<< HEAD
-void DBManager::addResource(const Resource &resource)
-=======
-<<<<<<< HEAD
-    if (database.isOpen())
-    {
-
-    }
 }
-=======
+
+
 void DBManager::addRessource(const Resource &resource)
->>>>>>> 8afc3267a471bd2e3df23e56844abd792ea71150
 {
     SelfManagedDatabase database;
 
@@ -76,12 +79,13 @@ void DBManager::addRessource(const Resource &resource)
                     "FROM TType "
                     "WHERE Label = :label");
         getResourceTypeIdQuery.bindValue(":label", resource.getStaffType());
-        while (getResourceTypeIdQuery.next())
-            resourceTypeId = getResourceTypeIdQuery.value(0).toInt();
+        getResourceTypeIdQuery.exec();
+        getResourceTypeIdQuery.last();
+        resourceTypeId = getResourceTypeIdQuery.value(0).toInt();
 
 
         QSqlQuery addResourceQuery;
-        addResourceQuery.prepare("INSERT INTO TResource (Nom, Prenom, IdType) "
+        addResourceQuery.prepare("INSERT INTO TRessource (Nom, Prenom, IdType) "
                                  "VALUES (:nom, :prenom, :idType)");
         addResourceQuery.bindValue(":nom", resource.getLastName());
         addResourceQuery.bindValue(":prenom", resource.getFirstName());
@@ -104,12 +108,13 @@ void DBManager::addITTech(const ITTech &itTech)
                     "FROM TType "
                     "WHERE Label = :label");
         getResourceTypeIdQuery.bindValue(":label", ITTech::RESOURCE_TYPE_IT_TECH);
-        while (getResourceTypeIdQuery.next())
-            resourceTypeId = getResourceTypeIdQuery.value(0).toInt();
+        getResourceTypeIdQuery.exec();
+        getResourceTypeIdQuery.last();
+        resourceTypeId = getResourceTypeIdQuery.value(0).toInt();
 
         QSqlQuery addResourceQuery;
         int resourceId;
-        addResourceQuery.prepare("INSERT INTO TResource (Nom, Prenom, IdType) "
+        addResourceQuery.prepare("INSERT INTO TRessource (Nom, Prenom, IdType) "
                                  "VALUES (:nom, :prenom, :idType)");
         addResourceQuery.bindValue(":nom", itTech.getLastName());
         addResourceQuery.bindValue(":prenom", itTech.getFirstName());
@@ -126,5 +131,3 @@ void DBManager::addITTech(const ITTech &itTech)
         addResourceQuery.exec();
     }
 }
-
->>>>>>> origin/master
