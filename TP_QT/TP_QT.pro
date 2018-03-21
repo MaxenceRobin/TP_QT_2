@@ -37,7 +37,8 @@ SOURCES += \
     ittech.cpp \
     addresourcestoclientdialog.cpp \
     c_init_bd.cpp \
-    dbmanager.cpp
+    dbmanager.cpp \
+    selfmanageddatabase.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,7 +53,8 @@ HEADERS += \
     ittech.h \
     addresourcestoclientdialog.h \
     c_init_bd.h \
-    dbmanager.h
+    dbmanager.h \
+    selfmanageddatabase.h
 
 FORMS += \
         mainwindow.ui \

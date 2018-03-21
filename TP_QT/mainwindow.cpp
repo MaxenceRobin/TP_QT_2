@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "dbmanager.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -21,12 +23,15 @@ MainWindow::~MainWindow()
 void MainWindow::showAddClientDialog()
 {
     AddClientDialog clientDialog(this);
+
     if (clientDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un client.");
     }
     else
+    {
         ui->statusBar->showMessage("Vous avez annulé l'ajout d'un client.");
+    }
 }
 
 
@@ -51,6 +56,9 @@ void MainWindow::showAboutDialog()
 void MainWindow::on_fromDateSearchDateEdit_userDateChanged(const QDate &date)
 {
     if (ui->toDateSearchDateEdit->date() < date)
+    {
         ui->toDateSearchDateEdit->setDate(date);
+    }
+
     ui->toDateSearchDateEdit->setMinimumDate(date);
 }
