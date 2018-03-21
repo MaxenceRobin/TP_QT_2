@@ -7,12 +7,14 @@
 
 #include <QSqlQueryModel>
 
+
 class DBManager
 {
 public:
     DBManager();
 
     static QSqlQueryModel * getClientsModel();
+    static QSqlQueryModel * getRessourcesModel();
 
     static void addRessource(const Resource &resource);
     static void addITTech(const ITTech &itTech);

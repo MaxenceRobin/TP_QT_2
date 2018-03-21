@@ -23,7 +23,6 @@ public:
     const QString getPassword() const { return mPassword; }
     void setPassword(const QString password) { mPassword = password; }
     bool checkPassword(const QString password) const { return mPassword.compare(password); }
-
 };
 
 #endif // ITTECH_H
