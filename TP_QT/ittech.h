@@ -3,7 +3,6 @@
 #include "staff.h"
 #include <stdexcept>
 
-#define STAFF_TYPE_IT_TECH "Informaticien"
 
 class ITTech : public Staff
 {
@@ -12,6 +11,7 @@ private:
     QString mPassword;
 
 public:
+    static const QString STAFF_TYPE_IT_TECH;
     //Constructors
     ITTech();
     ITTech(const QString lastName, const QString firstName, const QString login, const QString password);

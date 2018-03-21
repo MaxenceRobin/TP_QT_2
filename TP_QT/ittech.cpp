@@ -1,5 +1,7 @@
 #include "ittech.h"
 
+const QString ITTech::STAFF_TYPE_IT_TECH = "Informaticien";
+
 ITTech::ITTech()
     : Staff()
 {
