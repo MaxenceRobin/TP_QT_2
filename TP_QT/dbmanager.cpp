@@ -152,6 +152,6 @@ void DBManager::addITTech(const ITTech &itTech)
         addAccountQuery.bindValue(":idRessource", resourceId);
         addAccountQuery.bindValue(":login", itTech.getLogin());
         addAccountQuery.bindValue(":mdp", itTech.getPassword());
-        addResourceQuery.exec();
+        addAccountQuery.exec();
     }
 }
