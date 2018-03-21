@@ -39,7 +39,7 @@ void AddResourceDialog::checkBeforeSubmit()
         return;
     }
 
-    if (ui->typeComboBox->currentText() == ITTech::STAFF_TYPE_IT_TECH
+    if (ui->typeComboBox->currentText() == ITTech::RESOURCE_TYPE_IT_TECH
             && (ui->loginLineEdit->text().length() == 0 || ui->passwordLineEdit->text().length() == 0)) {
         QMessageBox::warning(this, "Avertissement", ERROR_MSG_COMPULSORY_INPUT);
         return;
@@ -50,7 +50,7 @@ void AddResourceDialog::checkBeforeSubmit()
 
 void AddResourceDialog::on_typeComboBox_currentIndexChanged()
 {
-    if (ui->typeComboBox->currentText() == ITTech::STAFF_TYPE_IT_TECH)
+    if (ui->typeComboBox->currentText() == ITTech::RESOURCE_TYPE_IT_TECH)
     {
         ui->loginLineEdit->setEnabled(true);
         ui->passwordLineEdit->setEnabled(true);
