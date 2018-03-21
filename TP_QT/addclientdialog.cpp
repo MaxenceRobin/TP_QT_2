@@ -90,7 +90,9 @@ void AddClientDialog::checkBeforeSubmit()
                   ui->appointmentDayCalendar->selectedDate(),
                   ui->rdvDurationSpinBox->value(),
                   ui->prioritySpinBox->value(),
-                  QList<Resource>() << Resource("Bonjour", "connard", "de merde"));
+                  QList<Resource>() << Resource("Dubois", "Jean", "Banquier A")
+                                    << Resource("Ducroix", "Lisa", "Banquier B")
+                  );
 
     DBManager::addClient(client);
 
