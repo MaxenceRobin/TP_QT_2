@@ -107,7 +107,6 @@ void DBManager::addRessource(const Resource &resource)
         getResourceTypeIdQuery.last();
         resourceTypeId = getResourceTypeIdQuery.value(0).toInt();
 
-
         QSqlQuery addResourceQuery;
         addResourceQuery.prepare("INSERT INTO TRessource (Nom, Prenom, IdType) "
                                  "VALUES (:nom, :prenom, :idType)");

@@ -21,6 +21,7 @@ SelfManagedDatabase::~SelfManagedDatabase()
     if (isOpen())
     {
         close();
-        QSqlDatabase::removeDatabase("QSQLITE");
+        QSqlDatabase::removeDatabase(QSqlDatabase::database().connectionName());
+        //QSqlDatabase::removeDatabase("QSQLITE");
     }
 }
