@@ -20,7 +20,7 @@ private:
 
 private slots:
     void checkBeforeSubmit();
-    void on_typeComboBox_currentIndexChanged(int index);
+    void on_typeComboBox_currentIndexChanged();
 };
 
 #endif // ADDSTAFFDIALOG_H

@@ -16,6 +16,7 @@ public:
     static QSqlQueryModel * getClientsModel();
     static QSqlQueryModel * getRessourcesModel();
 
+    static void addClient(const Client & client);
     static void addRessource(const Resource & resource);
 
 private:

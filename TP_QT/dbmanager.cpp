@@ -48,4 +48,12 @@ QSqlQueryModel * DBManager::getRessourcesModel()
     return new QSqlQueryModel;
 }
 
+void DBManager::addClient(const Client & client)
+{
+    SelfManagedDatabase database;
 
+    if (database.isOpen())
+    {
+
+    }
+}
