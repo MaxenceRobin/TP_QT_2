@@ -14,7 +14,8 @@ public:
 
     static QSqlQueryModel * getClientsModel();
 
-    static void addRessource(const Resource & resource);
+    static void addRessource(const Resource &resource);
+    static void addITTech(const ITTech &itTech);
 
 private:
 

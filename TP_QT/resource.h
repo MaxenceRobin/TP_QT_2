@@ -8,15 +8,15 @@
 class Resource : public Person
 {
 private:
-    QString mStaffType;
+    QString mResourceType;
 public:
     //Constructors
     Resource();
     Resource(const QString lastName, const QString firstName, const QString staffType);
 
     //Accessors
-    const QString getStaffType() const { return mStaffType; }
-    void setStaffType(const QString staffType) { mStaffType = staffType; }
+    const QString getStaffType() const { return mResourceType; }
+    void setStaffType(const QString staffType) { mResourceType = staffType; }
 };
 
 #endif // STAFF_H
