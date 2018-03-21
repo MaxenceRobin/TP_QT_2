@@ -14,9 +14,9 @@ public:
     DBManager();
 
     static QSqlQueryModel * getClientsModel();
-    static QSqlQueryModel * getRessourcesModel();
+    static QSqlQueryModel * getResourcesModel();
 
-    static void addRessource(const Resource &resource);
+    static void addResource(const Resource &resource);
     static void addITTech(const ITTech &itTech);
 
 private:

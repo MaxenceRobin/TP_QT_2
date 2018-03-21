@@ -61,7 +61,17 @@
       </layout>
      </item>
      <item>
-      <widget class="QListView" name="resourcesListView"/>
+      <widget class="QTableView" name="resourcesTableView">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -100,7 +110,6 @@
  </widget>
  <tabstops>
   <tabstop>resourceTypeComboBox</tabstop>
-  <tabstop>resourcesListView</tabstop>
   <tabstop>addButton</tabstop>
   <tabstop>okButton</tabstop>
  </tabstops>

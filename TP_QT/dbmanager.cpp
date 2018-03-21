@@ -28,7 +28,7 @@ QSqlQueryModel * DBManager::getClientsModel()
     return new QSqlQueryModel;
 }
 
-QSqlQueryModel * DBManager::getRessourcesModel()
+QSqlQueryModel * DBManager::getResourcesModel()
 {
     SelfManagedDatabase database;
 
@@ -49,7 +49,7 @@ QSqlQueryModel * DBManager::getRessourcesModel()
 }
 
 
-void DBManager::addRessource(const Resource &resource)
+void DBManager::addResource(const Resource &resource)
 {
     SelfManagedDatabase database;
 
