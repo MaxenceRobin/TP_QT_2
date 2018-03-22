@@ -281,7 +281,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QListView" name="resourcesListView"/>
+      <widget class="QTableView" name="resourcesTableView">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -438,7 +445,7 @@
   <tabstop>appointmentDayCalendar</tabstop>
   <tabstop>rdvDurationSpinBox</tabstop>
   <tabstop>prioritySpinBox</tabstop>
-  <tabstop>resourcesListView</tabstop>
+  <tabstop>resourcesTableView</tabstop>
   <tabstop>addResourcesButton</tabstop>
   <tabstop>moveUpRessourcesButton</tabstop>
   <tabstop>moveDownRessourcesButton</tabstop>

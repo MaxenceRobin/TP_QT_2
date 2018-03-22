@@ -10,7 +10,7 @@ DBManager::DBManager()
 {
 }
 
-const int DBManager::INDEX_TYPE_COL_RESOURCES_TYPES_MODEL = 2;
+const int DBManager::INDEX_TYPE_COL_RESOURCES_TYPES_MODEL = 3;
 
 const int DBManager::INDEX_ID_COL_CLIENTS_MODEL = 0;
 const int DBManager::INDEX_LNAME_COL_CLIENTS_MODEL = 1;
@@ -55,7 +55,7 @@ QSqlQueryModel * DBManager::getResourcesModel()
         QSqlQueryModel * model = new QSqlQueryModel;
 
         model->setQuery(
-                    "select R.Nom, R.Prenom, T.Label "
+                    "select R.Id, R.Nom, R.Prenom, T.Label "
                     "from TRessource R, TType T "
                     "where R.IdType = T.Id"
                     );
@@ -78,6 +78,7 @@ QSqlQueryModel * DBManager::getResourcesTypesModel()
         model->setQuery("SELECT Label FROM TType");
         return model;
     }
+
     return new QSqlQueryModel;
 }
 
@@ -112,25 +113,7 @@ void DBManager::addClient(const Client & client)
 
         for (const Resource & resource : client.getResources())
         {
-            QSqlQuery resourceIdQuery;
-
-            resourceIdQuery.prepare(
-                        "select R.Id "
-                        "from TRessource R, TType T "
-                        "where R.IdType = T.Id "
-                        "and R.Nom = :nom "
-                        "and R.Prenom = :prenom "
-                        "and T.Label = :label"
-                        );
-
-            resourceIdQuery.bindValue(":nom", resource.getLastName());
-            resourceIdQuery.bindValue(":prenom", resource.getFirstName());
-            resourceIdQuery.bindValue(":label", resource.getStaffType());
-
-            resourceIdQuery.exec();
-
-            resourceIdQuery.next();
-            unsigned int resourceId = resourceIdQuery.value(0).toInt();
+            unsigned int resourceId = resource.getId();
 
             QSqlQuery addRdvQuery;
 

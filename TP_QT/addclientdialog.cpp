@@ -40,12 +40,16 @@ AddClientDialog::AddClientDialog(QWidget *parent) :
     QValidator * phoneNumValidator = new QRegExpValidator(phoneNumRegExp, this);
     ui->phoneNumLineEdit->setValidator(phoneNumValidator);
 
-    if (ui->resourcesListView->selectionModel() == NULL)
+    if (ui->resourcesTableView->selectionModel() == NULL)
     {
         ui->moveDownRessourcesButton->setEnabled(false);
         ui->moveUpRessourcesButton->setEnabled(false);
         ui->deleteRessourcesButton->setEnabled(false);
     }
+
+    ui->resourcesTableView->setModel(DBManager::getResourcesModel());
+    ui->resourcesTableView->horizontalHeader()->hideSection(0);
+
 
     resourceDialog = new AddResourcesToClientDialog(this);
 }
@@ -90,11 +94,15 @@ void AddClientDialog::checkBeforeSubmit()
                   ui->appointmentDayCalendar->selectedDate(),
                   ui->rdvDurationSpinBox->value(),
                   ui->prioritySpinBox->value(),
-                  QList<Resource>() << Resource("Dubois", "Jean", "Banquier A")
-                                    << Resource("Ducroix", "Lisa", "Banquier B")
+                  QList<Resource>() << Resource("Dubois", "Jean", "Banquier A", 2)
+                                    << Resource("Ducroix", "Lisa", "Banquier B", 4)
                   );
 
     DBManager::addClient(client);
 
     accept();
+}
+
+void AddClientDialog::getNewResources(QModelIndexList model)
+{
 }

@@ -25,6 +25,7 @@ private:
 private slots:
     void addResources();
     void checkBeforeSubmit();
+    void getNewResources(QModelIndexList model);
 };
 
 #endif // ADDCLIENTDIALOG_H

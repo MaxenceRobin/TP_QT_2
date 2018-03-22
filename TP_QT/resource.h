@@ -12,7 +12,7 @@ private:
 public:
     //Constructors
     Resource();
-    Resource(const QString lastName, const QString firstName, const QString staffType);
+    Resource(const QString lastName, const QString firstName, const QString staffType, unsigned int id = -1);
 
     //Accessors
     const QString getStaffType() const { return mResourceType; }

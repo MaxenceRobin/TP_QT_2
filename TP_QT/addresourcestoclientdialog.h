@@ -31,8 +31,8 @@ private:
     QSortFilterProxyModel *resourcesProxyModel;
 
 signals:
-
     void newResources(QList<Resource> resources);
+    void newResourcesTest(QModelIndexList model);
 
 };
 
