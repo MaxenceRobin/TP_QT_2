@@ -102,6 +102,7 @@ void MainWindow::showAddResourceDialog()
     if (staffDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un personnel.");
+        refreshStaffView();
     }
     else
         ui->statusBar->showMessage("Vous avez annulé l'ajout d'un personnel.");
@@ -140,6 +141,7 @@ void MainWindow::on_fromDateSearchDateEdit_userDateChanged(const QDate &date)
     }
 
     ui->resourcesTreeView->setModel(DBManager::getNestedResourcesModel());
+<<<<<<< HEAD
 }*/
 
 
@@ -160,4 +162,7 @@ void MainWindow::on_resetPushButton_clicked()
     ui->firstNameSearchLineEdit->clear();
     ui->lastNameSearchLineEdit->clear();
     ui->idSearchLineEdit->clear();
+=======
+    ui->resourcesTreeView->expandAll();
+>>>>>>> 441b5216ff476e6e6ed877a601f1190164cacbb9
 }
