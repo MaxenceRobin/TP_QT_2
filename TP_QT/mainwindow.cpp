@@ -3,6 +3,10 @@
 
 #include "dbmanager.h"
 
+//Regular expression to control inputs
+#define NAME_SEARCH_REG_EXP "[A-Za-z]+((-|\\s)[A-Za-z]+)*"
+#define ID_SEARCH_REG_EXP "[0-9]*"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -13,6 +17,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->fromDateSearchDateEdit->setDate(QDate::currentDate());
     ui->toDateSearchDateEdit->setMinimumDate(ui->fromDateSearchDateEdit->date());
     ui->toDateSearchDateEdit->setDate(QDate::currentDate());
+
+    QRegExp nameSearchRegExp(NAME_SEARCH_REG_EXP);
+    QValidator * nameSearchValidator = new QRegExpValidator(nameSearchRegExp, this);
+    ui->lastNameSearchLineEdit->setValidator(nameSearchValidator);
+    ui->firstNameSearchLineEdit->setValidator(nameSearchValidator);
+
+    QRegExp idSearchRegExp(ID_SEARCH_REG_EXP);
+    QValidator * idSearchValidator = new QRegExpValidator(idSearchRegExp, this);
+    ui->idSearchLineEdit->setValidator(idSearchValidator);
 
     ui->clientTableView->setModel(DBManager::getClientsModel());
 }

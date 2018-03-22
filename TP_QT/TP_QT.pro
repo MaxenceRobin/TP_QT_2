@@ -40,7 +40,8 @@ SOURCES += \
     dbmanager.cpp \
     selfmanageddatabase.cpp \
     resource.cpp \
-    addresourcedialog.cpp
+    addresourcedialog.cpp \
+    clientssortfilterproxymodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -56,7 +57,8 @@ HEADERS += \
     dbmanager.h \
     selfmanageddatabase.h \
     resource.h \
-    addresourcedialog.h
+    addresourcedialog.h \
+    clientssortfilterproxymodel.h
 
 FORMS += \
         mainwindow.ui \

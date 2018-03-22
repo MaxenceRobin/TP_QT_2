@@ -11,7 +11,7 @@ AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
 
     resourcesModel = DBManager::getResourcesModel();
 
-    resourcesProxyModel = new QSortFilterProxyModel();
+    resourcesProxyModel = new QSortFilterProxyModel(this);
     resourcesProxyModel->setSourceModel(resourcesModel);
     //Filters on the resource type column
     resourcesProxyModel->setFilterKeyColumn(DBManager::INDEX_TYPE_COL_RESOURCES_TYPES_MODEL);
@@ -32,8 +32,6 @@ AddResourcesToClientDialog::~AddResourcesToClientDialog()
         delete resourcesTypesModel;
     if (resourcesModel != nullptr)
         delete resourcesModel;
-    if (resourcesProxyModel != nullptr)
-        delete resourcesProxyModel;
     delete ui;
 }
 
