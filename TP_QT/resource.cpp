@@ -6,7 +6,6 @@
 Resource::Resource()
     : Person(), mResourceType(DEFAULT_RESOURCE_TYPE)
 {
-
 }
 
 

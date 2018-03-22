@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     on_resetPushButton_clicked();
 
 
-    //refreshStaffView();
+    refreshStaffView();
 }
 
 
@@ -133,7 +133,7 @@ void MainWindow::on_fromDateSearchDateEdit_userDateChanged(const QDate &date)
     ui->toDateSearchDateEdit->setMinimumDate(date);
 }
 
-/*void MainWindow::refreshStaffView()
+void MainWindow::refreshStaffView()
 {
     if (ui->resourcesTreeView->model() != nullptr)
     {
@@ -141,8 +141,8 @@ void MainWindow::on_fromDateSearchDateEdit_userDateChanged(const QDate &date)
     }
 
     ui->resourcesTreeView->setModel(DBManager::getNestedResourcesModel());
-<<<<<<< HEAD
-}*/
+    ui->resourcesTreeView->expandAll();
+}
 
 
 /**
@@ -162,7 +162,5 @@ void MainWindow::on_resetPushButton_clicked()
     ui->firstNameSearchLineEdit->clear();
     ui->lastNameSearchLineEdit->clear();
     ui->idSearchLineEdit->clear();
-=======
     ui->resourcesTreeView->expandAll();
->>>>>>> 441b5216ff476e6e6ed877a601f1190164cacbb9
 }
