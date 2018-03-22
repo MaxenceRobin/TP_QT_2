@@ -6,6 +6,7 @@
 #include "ittech.h"
 
 #include <QSqlQueryModel>
+#include <QStandardItemModel>
 
 
 class DBManager
@@ -20,6 +21,7 @@ public:
     static QSqlQueryModel * getClientsModel();
     static QSqlQueryModel * getResourcesModel();
     static QSqlQueryModel * getResourcesTypesModel();
+    static QStandardItemModel * getNestedResourcesModel();
 
     static void addClient(const Client & client);
     static void addRessource(const Resource &resource);

@@ -3,6 +3,9 @@
 
 #include "dbmanager.h"
 
+#include <QStandardItemModel>
+#include <QDebug>
+
 //Regular expression to control inputs
 #define NAME_SEARCH_REG_EXP "[A-Za-z]+((-|\\s)[A-Za-z]+)*"
 #define ID_SEARCH_REG_EXP "[0-9]*"
@@ -28,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->idSearchLineEdit->setValidator(idSearchValidator);
 
     ui->clientTableView->setModel(DBManager::getClientsModel());
+    refreshStaffView();
 }
 
 MainWindow::~MainWindow()
@@ -44,6 +48,9 @@ void MainWindow::showAddClientDialog()
     if (clientDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un client.");
+
+        delete ui->clientTableView->model();
+        ui->clientTableView->setModel(DBManager::getClientsModel());
     }
     else
     {
@@ -54,7 +61,7 @@ void MainWindow::showAddClientDialog()
 
 void MainWindow::showAddResourceDialog()
 {
-    AddResourceDialog staffDialog(this);
+    AddResourceDialog staffDialog(UtilisationType::Create, this);
     if (staffDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un personnel.");
@@ -78,4 +85,14 @@ void MainWindow::on_fromDateSearchDateEdit_userDateChanged(const QDate &date)
     }
 
     ui->toDateSearchDateEdit->setMinimumDate(date);
+}
+
+void MainWindow::refreshStaffView()
+{
+    if (ui->resourcesTreeView->model() != nullptr)
+    {
+        delete ui->resourcesTreeView->model();
+    }
+
+    ui->resourcesTreeView->setModel(DBManager::getNestedResourcesModel());
 }

@@ -12,8 +12,8 @@
 #define ERROR_MSG_COMPULSORY_INPUT "Tous les champs obligatoires (*) doivent être complétés"
 
 
-AddResourceDialog::AddResourceDialog(QWidget *parent) :
-    QDialog(parent),
+AddResourceDialog::AddResourceDialog(UtilisationType type, QWidget *parent) :
+    mType(type), QDialog(parent),
     ui(new Ui::AddResourceDialog)
 {
     ui->setupUi(this);

@@ -26,6 +26,7 @@ private slots:
     void on_fromDateSearchDateEdit_userDateChanged(const QDate &date);
 
 private:
+    void refreshStaffView();
     Ui::MainWindow *ui;
 };
 
