@@ -4,7 +4,12 @@
 #include <map>
 #include <QString>
 
+#define DEFAULT_RESOURCE_TYPE "Divers"
 
+/**
+ * @brief The Resource class used to define a resource as a person with a resource type
+ * @see Person
+ */
 class Resource : public Person
 {
 private:
@@ -14,9 +19,15 @@ public:
     Resource();
     Resource(const QString lastName, const QString firstName, const QString staffType, unsigned int id = -1);
 
-    //Accessors
-    const QString getStaffType() const { return mResourceType; }
-    void setStaffType(const QString staffType) { mResourceType = staffType; }
+    /**
+     * @return The resource type
+     */
+    const QString getResourceType() const { return mResourceType; }
+    /**
+     * @brief Sets the new resource type
+     * @param staffType The new resource type
+     */
+    void setResourceType(const QString resourceType) { mResourceType = resourceType; }
 };
 
 #endif // STAFF_H

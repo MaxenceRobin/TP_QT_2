@@ -8,6 +8,11 @@
 #include <QDate>
 #include <dbmanager.h>
 
+
+/**
+ * @brief Class inherited from QSortFilterProxyModel used to filter the main window client model
+ * @see QSortFilterProxyModel
+ */
 class ClientsSortFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
@@ -27,21 +32,13 @@ public:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
 public slots:
-    //Accessors
+    //Slots to update the filters
     void setMinDate(const QDate &minDate) { mMinDate = minDate; invalidateFilter(); }
 
-<<<<<<< HEAD
     void setMaxDate(const QDate &maxDate) { mMaxDate = maxDate; invalidateFilter(); }
 
     void setLastNameFilter(const QString &lastNameRegExp)
         { mLastNameRegExp.setPattern(lastNameRegExp); invalidateFilter() ; }
-=======
-//    QString getLastName() const { return mLastName; }
-//    void setLastName(const QString &lastName) { mLastName = lastName; }
-
-//    QString getLastName() const { return mLastName; }
-//    void setLastName(const QString &lastName) { mLastName = lastName; }
->>>>>>> fcffbf07a0ef81f780aa6e5a2fee99d4f123044d
 
     void setFirstNameFilter(const QString &firstNameRegExp)
         { mFirstNameRegExp.setPattern(firstNameRegExp); invalidateFilter() ; }

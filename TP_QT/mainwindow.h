@@ -5,11 +5,16 @@
 #include "addclientdialog.h"
 #include "addresourcedialog.h"
 #include "aboutdialog.h"
+#include "clientssortfilterproxymodel.h"
 
 namespace Ui {
 class MainWindow;
 }
 
+
+/**
+ * @brief The MainWindow class
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -25,10 +30,13 @@ private slots:
 
     void on_fromDateSearchDateEdit_userDateChanged(const QDate &date);
 
+    void on_resetPushButton_clicked();
+
 private:
-    void refreshStaffView();
+    //void refreshStaffView();
     Ui::MainWindow *ui;
-    QSqlQueryModel *ClientsModel;
+    QSqlQueryModel *clientsModel;
+    ClientsSortFilterProxyModel *clientsProxyModel;
 };
 
 #endif // MAINWINDOW_H

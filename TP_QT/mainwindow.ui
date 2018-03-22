@@ -208,9 +208,12 @@
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="searchPushButton">
+             <widget class="QPushButton" name="resetPushButton">
+              <property name="toolTip">
+               <string>Réinitialiser les filtres</string>
+              </property>
               <property name="text">
-               <string>Rechercher</string>
+               <string>Réinitialiser</string>
               </property>
              </widget>
             </item>
@@ -278,7 +281,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="fileMenu">
@@ -368,7 +371,7 @@
   <tabstop>lastNameSearchLineEdit</tabstop>
   <tabstop>firstNameSearchLineEdit</tabstop>
   <tabstop>idSearchLineEdit</tabstop>
-  <tabstop>searchPushButton</tabstop>
+  <tabstop>resetPushButton</tabstop>
  </tabstops>
  <resources>
   <include location="ressources.qrc"/>

@@ -5,7 +5,7 @@
 #include "dbmanager.h"
 
 //Regular expression to control inputs
-#define NAME_REG_EXP "[A-Z][a-z]*((-|\\s)[A-Z][a-z]*)*"
+#define NAME_REG_EXP "[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ]*((-|\\s)[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ]*)*"
 #define FR_POSTAL_CODE_REG_EXP "[0-9]{5}"
 #define FR_PHONE_NUMBER_REG_EXP "[0-9]{10}"
 
