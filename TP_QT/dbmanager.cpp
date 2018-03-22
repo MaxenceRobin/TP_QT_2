@@ -199,7 +199,7 @@ void DBManager::addRessource(const Resource &resource)
                     "SELECT Id "
                     "FROM TType "
                     "WHERE Label = :label");
-        getResourceTypeIdQuery.bindValue(":label", resource.getStaffType());
+        getResourceTypeIdQuery.bindValue(":label", resource.getResourceType());
         getResourceTypeIdQuery.exec();
         getResourceTypeIdQuery.last();
         resourceTypeId = getResourceTypeIdQuery.value(0).toInt();

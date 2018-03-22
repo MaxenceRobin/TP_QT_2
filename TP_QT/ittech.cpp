@@ -11,7 +11,7 @@ const QString ITTech::RESOURCE_TYPE_IT_TECH = "Informaticien";
 ITTech::ITTech()
     : Resource()
 {
-    setStaffType(RESOURCE_TYPE_IT_TECH);
+    setResourceType(RESOURCE_TYPE_IT_TECH);
 }
 
 
