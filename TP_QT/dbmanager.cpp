@@ -57,7 +57,8 @@ QSqlQueryModel * DBManager::getResourcesModel()
         model->setQuery(
                     "select R.Id, R.Nom, R.Prenom, T.Label "
                     "from TRessource R, TType T "
-                    "where R.IdType = T.Id"
+                    "where R.IdType = T.Id "
+                    "group by T.Label"
                     );
 
         return model;
@@ -66,6 +67,60 @@ QSqlQueryModel * DBManager::getResourcesModel()
     return new QSqlQueryModel;
 }
 
+QStandardItemModel * DBManager::getNestedResourcesModel()
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QStandardItemModel * model;
+
+        QStandardItem * root = model->invisibleRootItem();
+
+        QSqlQuery getResourcesTypes;
+
+        getResourcesTypes.prepare(
+                    "select * from id "
+                    "from TType"
+                    );
+
+        getResourcesTypes.exec();
+
+        while (getResourcesTypes.next())
+        {
+            QStandardItem * typeItem = new QStandardItem(getResourcesTypes.value("Label").toString());
+            const int id = getResourcesTypes.value("Id").toInt();
+            typeItem->setData(id, Qt::UserRole);
+
+            root->appendRow(typeItem);
+
+            QSqlQuery getStaffByType;
+
+            getStaffByType.prepare(
+                        "select R.Id, R.Nom, R.Prenom "
+                        "from TRessource R "
+                        "where R.Id = :type"
+                        );
+
+            getStaffByType.bindValue(":type", id);
+            getStaffByType.exec();
+
+            while (getStaffByType.next())
+            {
+                QStandardItem * resourceItem = new QStandardItem(getStaffByType.value("Id").toInt());
+
+                resourceItem->setData(getStaffByType.value("Nom").toString(), Qt::UserRole);
+                resourceItem->setData(getStaffByType.value("Prenom").toString(), Qt::UserRole + 1);
+
+                typeItem->appendRow(resourceItem);
+            }
+        }
+
+        return model;
+    }
+
+    return new QStandardItemModel;
+}
 
 QSqlQueryModel * DBManager::getResourcesTypesModel()
 {

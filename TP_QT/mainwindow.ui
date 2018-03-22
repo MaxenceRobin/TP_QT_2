@@ -24,7 +24,7 @@
     <normaloff>:/mainWndowIcon</normaloff>:/mainWndowIcon</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout_4">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -248,6 +248,16 @@
              <bool>true</bool>
             </property>
            </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="staffListTab">
+         <attribute name="title">
+          <string>Liste personnel</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QTreeView" name="resourcesTreeView"/>
           </item>
          </layout>
         </widget>
