@@ -5,7 +5,7 @@ Person::Person()
 {
 }
 
-Person::Person(const QString lastName, const QString firstName)
-    :mLastName(lastName), mFirstName(firstName)
+Person::Person(const QString lastName, const QString firstName, unsigned int id)
+    : mId(id), mLastName(lastName), mFirstName(firstName)
 {
 }

@@ -27,7 +27,7 @@ public:
     Client(const QString lastName, const QString firstName, const QString address,
            const QString city, const int postalCode, const QString & comment, const unsigned int phoneNumber,
            const QDate & appointmentDay, const unsigned int appointmentDuration, const unsigned int priority,
-           const QList<Resource> & resources);
+           const QList<Resource> & resources, unsigned int id = -1);
 
     //Accessors
     const QString & getAddress() const { return mAddress; }

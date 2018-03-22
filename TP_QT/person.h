@@ -14,7 +14,7 @@ private:
     QString mFirstName;
 public:
     Person();
-    Person(const QString lastName, const QString firstName);
+    Person(const QString lastName, const QString firstName, unsigned int id = -1);
 
     unsigned int getId() const { return mId; }
     void setId(unsigned int id) { mId = id; }

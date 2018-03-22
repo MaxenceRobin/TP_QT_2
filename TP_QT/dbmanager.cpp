@@ -10,7 +10,7 @@ DBManager::DBManager()
 {
 }
 
-const int DBManager::INDEX_TYPE_COL_RESOURCES_TYPES_MODEL = 2;
+const int DBManager::INDEX_TYPE_COL_RESOURCES_TYPES_MODEL = 3;
 
 int DBManager::getMaxId(QString tableName)
 {
@@ -50,7 +50,7 @@ QSqlQueryModel * DBManager::getResourcesModel()
         QSqlQueryModel * model = new QSqlQueryModel;
 
         model->setQuery(
-                    "select R.Nom, R.Prenom, T.Label "
+                    "select R.Id, R.Nom, R.Prenom, T.Label "
                     "from TRessource R, TType T "
                     "where R.IdType = T.Id"
                     );
@@ -73,6 +73,7 @@ QSqlQueryModel * DBManager::getResourcesTypesModel()
         model->setQuery("SELECT Label FROM TType");
         return model;
     }
+
     return new QSqlQueryModel;
 }
 

@@ -20,6 +20,7 @@ AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
     resourcesProxyModel->setFilterKeyColumn(DBManager::INDEX_TYPE_COL_RESOURCES_TYPES_MODEL);
     ui->resourcesTableView->setModel(resourcesProxyModel);
     ui->resourcesTableView->setSortingEnabled(true);
+    ui->resourcesTableView->horizontalHeader()->hideSection(0);
 
     resourcesTypesModel = DBManager::getResourcesTypesModel();
     ui->resourceTypeComboBox->setModel(resourcesTypesModel);
@@ -66,11 +67,13 @@ void AddResourcesToClientDialog::createResourcesList()
 //                              item.child(0, 1).data(Qt::DisplayRole).toString(),
 //                              item.child(0, 2).data(Qt::DisplayRole).toString());
 
-        resources << Resource(ui->resourcesTableView->model()->index(item.row(), 0).data().toString(),
-                              ui->resourcesTableView->model()->index(item.row(), 1).data().toString(),
-                              ui->resourcesTableView->model()->index(item.row(), 2).data().toString());
+        resources << Resource(ui->resourcesTableView->model()->index(item.row(), 1).data().toString(),
+                              ui->resourcesTableView->model()->index(item.row(), 2).data().toString(),
+                              ui->resourcesTableView->model()->index(item.row(), 3).data().toString(),
+                              ui->resourcesTableView->model()->index(item.row(), 0).data().toInt());
 
-        qDebug() << resources.last().getFirstName()
+        qDebug() << resources.last().getId()
+                 << resources.last().getFirstName()
                  << resources.last().getLastName()
                  << resources.last().getStaffType();
     }

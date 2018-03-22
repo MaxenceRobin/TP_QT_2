@@ -25,6 +25,7 @@ private:
 private slots:
     void addResources();
     void checkBeforeSubmit();
+    void getNewResources(QList<Resource> resources);
 };
 
 #endif // ADDCLIENTDIALOG_H

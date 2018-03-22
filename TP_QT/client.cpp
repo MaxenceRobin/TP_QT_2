@@ -8,8 +8,8 @@ Client::Client(const QString lastName, const QString firstName, const QString ad
                const QString city, const int postalCode, const QString &comment,
                const unsigned int phoneNumber, const QDate &appointmentDay,
                const unsigned int appointmentDuration, const unsigned int priority,
-               const QList<Resource> &resources)
-    : Person(lastName, firstName), mAddress(address), mCity(city), mPostalCode(postalCode),
+               const QList<Resource> &resources, unsigned int id)
+    : Person(lastName, firstName, id), mAddress(address), mCity(city), mPostalCode(postalCode),
       mComment(comment), mPhoneNumber(phoneNumber), mAppointmentDay(appointmentDay),
       mAppointmentDuration(appointmentDuration), mPriority(priority), mResources(resources)
 {

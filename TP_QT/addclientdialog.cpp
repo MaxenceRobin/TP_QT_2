@@ -90,11 +90,23 @@ void AddClientDialog::checkBeforeSubmit()
                   ui->appointmentDayCalendar->selectedDate(),
                   ui->rdvDurationSpinBox->value(),
                   ui->prioritySpinBox->value(),
-                  QList<Resource>() << Resource("Dubois", "Jean", "Banquier A")
-                                    << Resource("Ducroix", "Lisa", "Banquier B")
+                  QList<Resource>() << Resource("Dubois", "Jean", "Banquier A", 2)
+                                    << Resource("Ducroix", "Lisa", "Banquier B", 4)
                   );
 
     DBManager::addClient(client);
 
     accept();
+}
+
+void AddClientDialog::getNewResources(QList<Resource> resources)
+{
+    QAbstractItemModel & model = *ui->resourcesListView->model();
+
+    for (const Resource & resource : resources)
+    {
+//        const int row = model.rowCount();
+//        model.insertRow(row);
+//        model.setData(QModelIndex(row, ))
+    }
 }

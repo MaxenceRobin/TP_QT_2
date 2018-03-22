@@ -6,7 +6,7 @@ Resource::Resource()
 
 }
 
-Resource::Resource(const QString lastName, const QString firstName, const QString resourceType)
-    : Person(lastName, firstName), mResourceType(resourceType)
+Resource::Resource(const QString lastName, const QString firstName, const QString resourceType, unsigned int id)
+    : Person(lastName, firstName, id), mResourceType(resourceType)
 {
 }
