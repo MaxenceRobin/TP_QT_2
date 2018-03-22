@@ -57,8 +57,7 @@ QSqlQueryModel * DBManager::getResourcesModel()
         model->setQuery(
                     "select R.Id, R.Nom, R.Prenom, T.Label "
                     "from TRessource R, TType T "
-                    "where R.IdType = T.Id "
-                    "group by T.Label"
+                    "where R.IdType = T.Id"
                     );
 
         return model;
@@ -73,14 +72,14 @@ QStandardItemModel * DBManager::getNestedResourcesModel()
 
     if (database.isOpen())
     {
-        QStandardItemModel * model;
+        QStandardItemModel * model = new QStandardItemModel;
 
         QStandardItem * root = model->invisibleRootItem();
 
         QSqlQuery getResourcesTypes;
 
         getResourcesTypes.prepare(
-                    "select * from id "
+                    "select * "
                     "from TType"
                     );
 
@@ -99,7 +98,7 @@ QStandardItemModel * DBManager::getNestedResourcesModel()
             getStaffByType.prepare(
                         "select R.Id, R.Nom, R.Prenom "
                         "from TRessource R "
-                        "where R.Id = :type"
+                        "where R.IdType = :type"
                         );
 
             getStaffByType.bindValue(":type", id);
@@ -107,12 +106,7 @@ QStandardItemModel * DBManager::getNestedResourcesModel()
 
             while (getStaffByType.next())
             {
-                QStandardItem * resourceItem = new QStandardItem(getStaffByType.value("Id").toInt());
-
-                resourceItem->setData(getStaffByType.value("Nom").toString(), Qt::UserRole);
-                resourceItem->setData(getStaffByType.value("Prenom").toString(), Qt::UserRole + 1);
-
-                typeItem->appendRow(resourceItem);
+                typeItem->appendRow(new QStandardItem(getStaffByType.value("Nom").toString()));
             }
         }
 

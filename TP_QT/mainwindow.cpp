@@ -65,6 +65,7 @@ void MainWindow::showAddResourceDialog()
     if (staffDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un personnel.");
+        refreshStaffView();
     }
     else
         ui->statusBar->showMessage("Vous avez annulé l'ajout d'un personnel.");
@@ -95,4 +96,5 @@ void MainWindow::refreshStaffView()
     }
 
     ui->resourcesTreeView->setModel(DBManager::getNestedResourcesModel());
+    ui->resourcesTreeView->expandAll();
 }
