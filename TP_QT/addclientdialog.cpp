@@ -68,6 +68,9 @@ void AddClientDialog::addResources()
 }
 
 
+/**
+ * @brief Checks the form before submiting it to the database
+ */
 void AddClientDialog::checkBeforeSubmit()
 {
     if (ui->nameLineEdit->text().length() == 0 || ui->firstNameLineEdit->text().length() == 0
@@ -79,7 +82,7 @@ void AddClientDialog::checkBeforeSubmit()
         QMessageBox::warning(this, "Avertissement", ERROR_MSG_CODE_POSTAL_INPUT);
         return;
     }
-    if (ui->phoneNumLineEdit->text().length() < 10) {
+    if (ui->phoneNumLineEdit->text().length() > 0 && ui->phoneNumLineEdit->text().length() < 10) {
         QMessageBox::warning(this, "Avertissement", ERROR_MSG_PHONE_NUMBER_INPUT);
         return;
     }

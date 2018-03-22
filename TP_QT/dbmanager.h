@@ -34,6 +34,7 @@ public:
     static void addClient(const Client & client);
     static void addRessource(const Resource &resource);
     static void addITTech(const ITTech &itTech);
+    static bool checkAccount(const QString login, const QString password);
 
     static void editResource(const Resource & resource);
 
