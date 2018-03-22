@@ -21,7 +21,7 @@ public:
 
 private slots:
     void on_resourceTypeComboBox_currentIndexChanged(const QString &resourceType);
-    void createResourcesList();
+    //void createResourcesList();
     void on_resourcesTableView_clicked(const QModelIndex &index);
 
 private:
@@ -31,9 +31,8 @@ private:
     QSortFilterProxyModel *resourcesProxyModel;
 
 signals:
-    void newResources(QList<Resource> resources);
-    void newResourcesTest(QModelIndexList model);
-
+    void newResources(QList<Resource> * resources);
+    //void newResourcesTest(QModelIndexList model);
 };
 
 #endif // ADDRESOURCESTOCLIENTDIALOG_H

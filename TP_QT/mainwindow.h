@@ -33,7 +33,8 @@ private slots:
     void on_resetPushButton_clicked();
 
 private:
-    void refreshStaffView();
+    void refreshResourceView();
+    void refreshClientsView();
     Ui::MainWindow *ui;
     QSqlQueryModel *clientsModel;
     ClientsSortFilterProxyModel *clientsProxyModel;

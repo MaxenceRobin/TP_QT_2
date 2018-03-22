@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     on_resetPushButton_clicked();
 
 
-    refreshStaffView();
+    refreshResourceView();
 }
 
 
@@ -85,6 +85,7 @@ void MainWindow::showAddClientDialog()
         if (clientsModel != nullptr)
             delete clientsModel;
         clientsModel = DBManager::getClientsModel();
+        refreshClientsView();
     }
     else
     {
@@ -133,7 +134,11 @@ void MainWindow::on_fromDateSearchDateEdit_userDateChanged(const QDate &date)
     ui->toDateSearchDateEdit->setMinimumDate(date);
 }
 
-void MainWindow::refreshStaffView()
+
+/**
+ * @brief Refreshes the resources table view
+ */
+void MainWindow::refreshResourceView()
 {
     if (ui->resourcesTreeView->model() != nullptr)
     {
@@ -142,6 +147,18 @@ void MainWindow::refreshStaffView()
 
     ui->resourcesTreeView->setModel(DBManager::getNestedResourcesModel());
     ui->resourcesTreeView->expandAll();
+}
+
+
+/**
+ * @brief Refreshes the clients table view
+ */
+void MainWindow::refreshClientsView()
+{
+    if (clientsModel != nullptr)
+        delete clientsModel;
+    clientsModel = DBManager::getClientsModel();
+    clientsProxyModel->setSourceModel(clientsModel);
 }
 
 

@@ -52,6 +52,8 @@ AddClientDialog::AddClientDialog(QWidget *parent) :
 
 
     resourceDialog = new AddResourcesToClientDialog(this);
+
+    QObject::connect(resourceDialog, SIGNAL(newResources(QList<Resource>)), this, SLOT(getNewResources(QList<Resource>)));
 }
 
 AddClientDialog::~AddClientDialog()
@@ -106,6 +108,8 @@ void AddClientDialog::checkBeforeSubmit()
     accept();
 }
 
-void AddClientDialog::getNewResources(QModelIndexList model)
+void AddClientDialog::getNewResources(QList<Resource> resources)
 {
+
 }
+

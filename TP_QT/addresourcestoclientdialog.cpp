@@ -57,11 +57,11 @@ void AddResourcesToClientDialog::on_resourcesTableView_clicked(const QModelIndex
         ui->addButton->setEnabled(false);
 }
 
-void AddResourcesToClientDialog::createResourcesList()
-{
-    QList<Resource> resources;
+//void AddResourcesToClientDialog::createResourcesList()
+//{
+    //QList<Resource> resources;
 
-    emit newResourcesTest(ui->resourcesTableView->selectionModel()->selectedRows());
+    //emit newResourcesTest(ui->resourcesTableView->selectionModel()->selectedRows());
 
 //    for (QModelIndex & item : ui->resourcesTableView->selectionModel()->selectedRows())
 //    {
@@ -81,4 +81,4 @@ void AddResourcesToClientDialog::createResourcesList()
 //    }
 
 //    emit newResources(resources);
-}
+//}
