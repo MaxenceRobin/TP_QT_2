@@ -330,6 +330,10 @@ void DBManager::editResource(const Resource & resource)
     }
 }
 
+void DBManager::editITTech(const ITTech & resource)
+{
+}
+
 /**
  * @brief Checks if the accout exists in the database
  * @param login The login

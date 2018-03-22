@@ -4,6 +4,8 @@
 #include "resource.h"
 #include "dbmanager.h"
 
+#include <QDebug>
+
 //Regular expression to control inputs
 #define NAME_REG_EXP "[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ]*((-|\\s)[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ]*)*"
 #define FR_POSTAL_CODE_REG_EXP "[0-9]{5}"
@@ -47,7 +49,6 @@ AddClientDialog::AddClientDialog(QWidget *parent) :
         ui->deleteRessourcesButton->setEnabled(false);
     }
 
-    ui->resourcesTableView->setModel(DBManager::getResourcesModel());
     ui->resourcesTableView->horizontalHeader()->hideSection(0);
 
 
@@ -66,6 +67,11 @@ AddClientDialog::~AddClientDialog()
 
 void AddClientDialog::addResources()
 {
+    if (ui->resourcesTableView->model() != nullptr)
+    {
+        delete ui->resourcesTableView->model();
+    }
+
     resourceDialog->show();
 }
 
@@ -110,6 +116,37 @@ void AddClientDialog::checkBeforeSubmit()
 
 void AddClientDialog::getNewResources(QList<Resource> resources)
 {
+    // Removes the duplicates
+    //resources = resources.toSet().toList();
 
+    QStandardItemModel * model;
+
+    if (ui->resourcesTableView->model() != nullptr)
+    {
+        model = static_cast<QStandardItemModel*>(ui->resourcesTableView->model());
+    }
+    else
+    {
+        model = new QStandardItemModel(this);
+    }
+
+    QStandardItem * root = model->invisibleRootItem();
+
+    for (const Resource & resource : resources)
+    {
+        QStandardItem * resourceItem =
+                new QStandardItem(QString::number(resource.getId()));
+
+        resourceItem->appendRow(
+                    QList<QStandardItem*>()
+                    << new QStandardItem(resource.getLastName())
+                    << new QStandardItem(resource.getFirstName())
+                    << new QStandardItem(resource.getResourceType())
+                    );
+
+        qDebug() << resourceItem;
+
+        root->appendRow(resourceItem);
+    }
 }
 

@@ -69,7 +69,7 @@ void AddResourceDialog::checkBeforeSubmit()
 
         if (mIdResource != -1)
         {
-            DBManager::editIITTech(itTech);
+            DBManager::editITTech(itTech);
         }
         else
         {
