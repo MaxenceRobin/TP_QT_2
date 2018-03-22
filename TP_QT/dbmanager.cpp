@@ -12,6 +12,11 @@ DBManager::DBManager()
 
 const int DBManager::INDEX_TYPE_COL_RESOURCES_TYPES_MODEL = 2;
 
+const int DBManager::INDEX_ID_COL_CLIENTS_MODEL = 0;
+const int DBManager::INDEX_LNAME_COL_CLIENTS_MODEL = 1;
+const int DBManager::INDEX_FNAME_COL_CLIENTS_MODEL = 2;
+const int DBManager::INDEX_DATE_COL_CLIENTS_MODEL = 8;
+
 int DBManager::getMaxId(QString tableName)
 {
     QString queryString = ("SELECT MAX(Id) FROM " + tableName);

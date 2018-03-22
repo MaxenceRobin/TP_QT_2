@@ -2,8 +2,11 @@
 #define CLIENTSSORTFILTERPROXYMODEL_H
 
 #include <QObject>
+#include <QApplication>
+#include <QtWidgets>
 #include <QSortFilterProxyModel>
 #include <QDate>
+#include <dbmanager.h>
 
 class ClientsSortFilterProxyModel : public QSortFilterProxyModel
 {
@@ -12,31 +15,31 @@ class ClientsSortFilterProxyModel : public QSortFilterProxyModel
 private:
     QDate mMinDate;
     QDate mMaxDate;
-    QString mLastName;
-    QString mFirstName;
-    long unsigned int mId;
+    QRegExp mLastNameRegExp;
+    QRegExp mFirstNameRegExp;
+    QRegExp mIdRegExp;
+
+    bool dateIsInRange (const QDate &date) const;
 
 public:
-    ClientsSortFilterProxyModel(QObject *parent = 0);
+    explicit ClientsSortFilterProxyModel(QObject *parent = 0);
 
-    //Accessors
-    QDate getMinDate() const { return mMinDate; }
-    void setMinDate(const QDate &minDate) { mMinDate = minDate; }
-
-    QDate getMaxDate() const { return mMaxDate; }
-    void setMaxDate(const QDate &maxDate) { mMaxDate = maxDate; }
-
-    QString getLastName() const { return mLastName; }
-    void setLastName(const QString &lastName) { mLastName = lastName; }
-
-    QString getLastName() const { return mLastName; }
-    void setLastName(const QString &lastName) { mLastName = lastName; }
-
-    long unsigned int getId() const { return mId; }
-    void setId(const long unsigned int id) { mId = id; }
-
-protected:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+
+public slots:
+    //Accessors
+    void setMinDate(const QDate &minDate) { mMinDate = minDate; invalidateFilter(); }
+
+    void setMaxDate(const QDate &maxDate) { mMaxDate = maxDate; invalidateFilter(); }
+
+    void setLastNameFilter(const QString &lastNameRegExp)
+        { mLastNameRegExp.setPattern(lastNameRegExp); invalidateFilter() ; }
+
+    void setFirstNameFilter(const QString &firstNameRegExp)
+        { mFirstNameRegExp.setPattern(firstNameRegExp); invalidateFilter() ; }
+
+    void setIdFilter(const QString &idRegExp)
+        { mIdRegExp.setPattern(idRegExp); invalidateFilter() ; }
 
 };
 
