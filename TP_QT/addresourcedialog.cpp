@@ -64,9 +64,17 @@ void AddResourceDialog::checkBeforeSubmit()
 
     if (ui->typeComboBox->currentText() == ITTech::RESOURCE_TYPE_IT_TECH) {
         ITTech itTech(ui->nameLineEdit->text(), ui->firstNameLineEdit->text(),
-                      ui->loginLineEdit->text(), ui->passwordLineEdit->text());
+                      ui->loginLineEdit->text(), ui->passwordLineEdit->text(),
+                      mIdResource);
 
-        DBManager::addITTech(itTech);
+        if (mIdResource != -1)
+        {
+            DBManager::editIITTech(itTech);
+        }
+        else
+        {
+            DBManager::addITTech(itTech);
+        }
     }
     else
     {

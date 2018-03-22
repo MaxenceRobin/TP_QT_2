@@ -22,7 +22,7 @@ ITTech::ITTech()
  * @param login IT Technician's login
  * @param password IT Technician's password
  */
-ITTech::ITTech(const QString lastName, const QString firstName, const QString login, const QString password)
-    : Resource(lastName, firstName, RESOURCE_TYPE_IT_TECH), mLogin(login), mPassword(password)
+ITTech::ITTech(const QString lastName, const QString firstName, const QString login, const QString password, unsigned int idResource)
+    : Resource(lastName, firstName, RESOURCE_TYPE_IT_TECH, idResource), mLogin(login), mPassword(password)
 {
 }

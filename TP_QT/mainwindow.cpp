@@ -118,6 +118,12 @@ void MainWindow::showAddResourceDialog()
  */
 void MainWindow::showUpdateResource(QModelIndex index)
 {
+    // If the index has no parent, it can't be edited
+    if (index.parent() == QModelIndex())
+    {
+        return;
+    }
+
     AddResourceDialog staffDialog(index.data(Qt::UserRole + 1).toInt(), this);
 
     if (staffDialog.exec() == QDialog::Accepted)
