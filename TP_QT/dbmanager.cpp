@@ -89,7 +89,6 @@ QStandardItemModel * DBManager::getNestedResourcesModel()
         {
             QStandardItem * typeItem = new QStandardItem(getResourcesTypes.value("Label").toString());
             const int id = getResourcesTypes.value("Id").toInt();
-            typeItem->setData(id, Qt::UserRole);
 
             root->appendRow(typeItem);
 
@@ -120,6 +119,44 @@ QStandardItemModel * DBManager::getNestedResourcesModel()
     }
 
     return new QStandardItemModel;
+}
+
+Resource DBManager::getResourceById(unsigned int id)
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQuery getResource;
+
+        getResource.prepare(
+                    "select * "
+                    "from TRessource R, TType T "
+                    "where R.Id = :id "
+                    "and R.IdType = T.Id"
+                    );
+
+        getResource.bindValue(":id", id);
+
+        getResource.exec();
+
+        getResource.next();
+
+        qDebug() << getResource.value("Nom").toString();
+
+        Resource newResource(
+                    getResource.value("Nom").toString(),
+                    getResource.value("Prenom").toString(),
+                    getResource.value("Label").toString(),
+                    id
+                    );
+
+        qDebug() << newResource.getFirstName()
+                 << newResource.getLastName()
+                 << newResource.getResourceType();
+
+        return newResource;
+    }
 }
 
 QSqlQueryModel * DBManager::getResourcesTypesModel()
@@ -252,6 +289,46 @@ void DBManager::addITTech(const ITTech &itTech)
     }
 }
 
+void DBManager::editResource(const Resource & resource)
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQuery getTypeId;
+
+        getTypeId.prepare(
+                    "select Id "
+                    "from TType "
+                    "where Label = :label"
+                    );
+
+        getTypeId.bindValue(":label", resource.getResourceType());
+        getTypeId.exec();
+
+        getTypeId.next();
+
+        const int idType = getTypeId.value("Id").toInt();
+
+        QSqlQuery updateResource;
+
+        updateResource.prepare(
+                    "update TRessource "
+                    "set "
+                    "Nom = :nom, "
+                    "Prenom = :prenom, "
+                    "IdType = :idtype "
+                    "where Id = :id"
+                    );
+
+        updateResource.bindValue(":nom", resource.getLastName());
+        updateResource.bindValue(":prenom", resource.getFirstName());
+        updateResource.bindValue(":idtype", idType);
+        updateResource.bindValue(":id", resource.getId());
+
+        updateResource.exec();
+    }
+}
 
 /**
  * @brief Checks if the accout exists in the database

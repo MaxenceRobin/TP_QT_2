@@ -5,6 +5,8 @@
 #include "ittech.h"
 #include "dbmanager.h"
 
+#include <QDebug>
+
 //Regular expression to control inputs
 #define NAME_REG_EXP "[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ]*((-|\\s)[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ]*)*"
 
@@ -12,8 +14,8 @@
 #define ERROR_MSG_COMPULSORY_INPUT "Tous les champs obligatoires (*) doivent être complétés"
 
 
-AddResourceDialog::AddResourceDialog(UtilisationType type, QWidget *parent) :
-    mType(type), QDialog(parent),
+AddResourceDialog::AddResourceDialog(int idResource, QWidget *parent) :
+    mIdResource(idResource), QDialog(parent),
     ui(new Ui::AddResourceDialog)
 {
     ui->setupUi(this);
@@ -28,6 +30,22 @@ AddResourceDialog::AddResourceDialog(UtilisationType type, QWidget *parent) :
 
     ui->typeComboBox->setCurrentIndex(0);
     on_typeComboBox_currentIndexChanged();
+
+    // If the id is defined, we're editing an existing resource
+    if (mIdResource != -1)
+    {
+        setWindowTitle("Editer ressource");
+
+        Resource editedResource = DBManager::getResourceById(idResource);
+
+        qDebug() << editedResource.getFirstName()
+                 << editedResource.getLastName()
+                 << editedResource.getResourceType();
+
+        ui->nameLineEdit->setText(editedResource.getLastName());
+        ui->firstNameLineEdit->setText(editedResource.getFirstName());
+        ui->typeComboBox->setCurrentText(editedResource.getResourceType());
+    }
 }
 
 
@@ -52,9 +70,19 @@ void AddResourceDialog::checkBeforeSubmit()
     }
     else
     {
-        Resource resource(ui->nameLineEdit->text(), ui->firstNameLineEdit->text(), ui->typeComboBox->currentText());
+        Resource resource(ui->nameLineEdit->text(),
+                          ui->firstNameLineEdit->text(),
+                          ui->typeComboBox->currentText(),
+                          mIdResource);
 
-        DBManager::addRessource(resource);
+        if (mIdResource != -1)
+        {
+            DBManager::editResource(resource);
+        }
+        else
+        {
+            DBManager::addRessource(resource);
+        }
     }
 
     accept();

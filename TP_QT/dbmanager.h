@@ -29,11 +29,14 @@ public:
     static QSqlQueryModel * getResourcesModel();
     static QSqlQueryModel * getResourcesTypesModel();
     static QStandardItemModel * getNestedResourcesModel();
+    static Resource getResourceById(unsigned int id);
 
     static void addClient(const Client & client);
     static void addRessource(const Resource &resource);
     static void addITTech(const ITTech &itTech);
     static bool checkAccount(const QString login, const QString password);
+
+    static void editResource(const Resource & resource);
 
 private:
 
