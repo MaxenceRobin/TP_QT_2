@@ -6,7 +6,7 @@
 #include <QStandardItemModel>
 #include <QDebug>
 
-//Regular expression to control inputs
+//Regular expressions to control inputs
 #define NAME_SEARCH_REG_EXP "[A-ZÀ-ÖØ-Ýa-zà-öø-ÿ]+((-|\\s)[A-ZÀ-ÖØ-Ýa-zà-öø-ÿ]+)*"
 #define ID_SEARCH_REG_EXP "[0-9]*"
 
@@ -102,7 +102,7 @@ void MainWindow::showAddResourceDialog()
     if (staffDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un personnel.");
-        refreshStaffView();
+        //refreshStaffView();
     }
     else
         ui->statusBar->showMessage("Vous avez annulé l'ajout d'un personnel.");
@@ -141,8 +141,12 @@ void MainWindow::refreshStaffView()
     }
 
     ui->resourcesTreeView->setModel(DBManager::getNestedResourcesModel());
+<<<<<<< HEAD
     ui->resourcesTreeView->expandAll();
 }
+=======
+}*/
+>>>>>>> origin/master
 
 
 /**
@@ -162,5 +166,8 @@ void MainWindow::on_resetPushButton_clicked()
     ui->firstNameSearchLineEdit->clear();
     ui->lastNameSearchLineEdit->clear();
     ui->idSearchLineEdit->clear();
+<<<<<<< HEAD
     ui->resourcesTreeView->expandAll();
+=======
+>>>>>>> origin/master
 }
