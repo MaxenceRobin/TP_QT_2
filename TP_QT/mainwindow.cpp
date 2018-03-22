@@ -141,12 +141,8 @@ void MainWindow::refreshStaffView()
     }
 
     ui->resourcesTreeView->setModel(DBManager::getNestedResourcesModel());
-<<<<<<< HEAD
     ui->resourcesTreeView->expandAll();
 }
-=======
-}*/
->>>>>>> origin/master
 
 
 /**
@@ -160,14 +156,10 @@ void MainWindow::on_resetPushButton_clicked()
     //Sets the min date to current date -2 months, max date to current date +2 months
     ui->fromDateSearchDateEdit->setDate(QDate::currentDate().addMonths(-2));
     ui->toDateSearchDateEdit->setMinimumDate(ui->fromDateSearchDateEdit->date());
-    ui->toDateSearchDateEdit->setDate(QDate::currentDate().addMonths(4));
+    ui->toDateSearchDateEdit->setDate(QDate::currentDate().addMonths(2));
 
     //Clears the lineEdits
     ui->firstNameSearchLineEdit->clear();
     ui->lastNameSearchLineEdit->clear();
     ui->idSearchLineEdit->clear();
-<<<<<<< HEAD
-    ui->resourcesTreeView->expandAll();
-=======
->>>>>>> origin/master
 }
