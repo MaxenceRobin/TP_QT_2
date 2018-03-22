@@ -29,7 +29,6 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     logindialog.cpp \
-    authentificationcontroller.cpp \
     addclientdialog.cpp \
     aboutdialog.cpp \
     client.cpp \
@@ -46,7 +45,6 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     logindialog.h \
-    authentificationcontroller.h \
     addclientdialog.h \
     aboutdialog.h \
     client.h \

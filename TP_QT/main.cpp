@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     LoginDialog d;
 
     // If the db still doesn't exist, it has to be created
-    //if (!QFile::exists("base_tmp.sqli"))
+    if (!QFile::exists("base_tmp.sqli"))
     {
         C_INIT_BD::Creation_BD();
     }

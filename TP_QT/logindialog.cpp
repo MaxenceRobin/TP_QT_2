@@ -1,7 +1,7 @@
 #include "logindialog.h"
 #include "ui_logindialog.h"
 #include "qmessagebox.h"
-#include "authentificationcontroller.h"
+#include "dbmanager.h"
 
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
@@ -30,6 +30,5 @@ void LoginDialog::connect()
 
 bool LoginDialog:: checkLogin()
 {
-    AuthentificationController auth;
-    return auth.checkAuthentification(ui->loginLineEditI->text(), ui->passwordLineEdit->text());
+    return DBManager::checkAccount(ui->loginLineEditI->text(), ui->passwordLineEdit->text());
 }

@@ -251,3 +251,28 @@ void DBManager::addITTech(const ITTech &itTech)
         addAccountQuery.exec();
     }
 }
+
+
+/**
+ * @brief Checks if the accout exists in the database
+ * @param login The login
+ * @param password The password
+ * @return true if the accont exists, false else
+ */
+bool DBManager::checkAccount(const QString login, const QString password)
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQuery query;
+        query.prepare("SELECT * FROM TCompte "
+                      "WHERE Login = :login AND MdP = :mdp");
+        query.bindValue(":login", login);
+        query.bindValue(":mdp", password);
+        query.exec();
+        if (query.first())
+            return true;
+    }
+    return false;
+}
