@@ -2,9 +2,10 @@
 #define ADDRESOURCESTOCLIENTDIALOG_H
 
 #include <QDialog>
-#include "resource.h"
 #include <QSortFilterProxyModel>
 #include <QSqlQueryModel>
+
+#include "resource.h"
 
 namespace Ui {
 class AddResourcesToClientDialog;
@@ -20,23 +21,19 @@ public:
 
 private slots:
     void on_resourceTypeComboBox_currentIndexChanged(const QString &resourceType);
-
+    void createResourcesList();
     void on_resourcesTableView_clicked(const QModelIndex &index);
 
 private:
     Ui::AddResourcesToClientDialog *ui;
-
-private slots:
-    void refreshResourcesTableView();
-    void createResourcesList();
-
-signals:
-
-    void newRessources(QList<Resource> resources);
-
     QSqlQueryModel *resourcesTypesModel;
     QSqlQueryModel *resourcesModel;
     QSortFilterProxyModel *resourcesProxyModel;
+
+signals:
+
+    void newResources(QList<Resource> resources);
+
 };
 
 #endif // ADDRESOURCESTOCLIENTDIALOG_H

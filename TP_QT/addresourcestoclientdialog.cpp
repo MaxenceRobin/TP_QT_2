@@ -12,10 +12,6 @@ AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
 
     connect(ui->addButton, SIGNAL(clicked(bool)), this, SLOT(createResourcesList()));
 
-//    if (ui->resourcesTableView->selectionModel() == NULL)
-//        ui->addButton->setEnabled(false);
-
-    //refreshResourcesTableView();
     resourcesModel = DBManager::getResourcesModel();
 
     resourcesProxyModel = new QSortFilterProxyModel();
@@ -46,13 +42,6 @@ AddResourcesToClientDialog::~AddResourcesToClientDialog()
 
 void AddResourcesToClientDialog::on_resourceTypeComboBox_currentIndexChanged(const QString &resourceType)
 {
-//    if (ui->resourcesTableView->model() != nullptr)
-//    {
-//        delete ui->resourcesTableView->model();
-//    }
-
-//    ui->resourcesTableView->setModel(DBManager::getResourcesModel());
-
     //Filters by
     resourcesProxyModel->setFilterRegExp(resourceType);
     //Resets the selection
@@ -88,7 +77,5 @@ void AddResourcesToClientDialog::createResourcesList()
                  << resources.last().getStaffType();
     }
 
-    emit newRessources(resources);
-
-    accept();
+    emit newResources(resources);
 }
