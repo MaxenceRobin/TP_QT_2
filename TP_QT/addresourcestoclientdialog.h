@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <QSortFilterProxyModel>
 #include <QSqlQueryModel>
-#include <QItemSelectionModel>
 
 #include "resource.h"
 
@@ -33,7 +32,7 @@ private:
 
 signals:
     void newResources(QList<Resource> resources);
-    void newResourcesTest(QItemSelectionModel model);
+    void newResourcesTest(QModelIndexList model);
 
 };
 

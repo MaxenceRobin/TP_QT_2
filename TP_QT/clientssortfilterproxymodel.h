@@ -26,11 +26,11 @@ public:
     QDate getMaxDate() const { return mMaxDate; }
     void setMaxDate(const QDate &maxDate) { mMaxDate = maxDate; }
 
-    QString getLastName() const { return mLastName; }
-    void setLastName(const QString &lastName) { mLastName = lastName; }
+//    QString getLastName() const { return mLastName; }
+//    void setLastName(const QString &lastName) { mLastName = lastName; }
 
-    QString getLastName() const { return mLastName; }
-    void setLastName(const QString &lastName) { mLastName = lastName; }
+//    QString getLastName() const { return mLastName; }
+//    void setLastName(const QString &lastName) { mLastName = lastName; }
 
     long unsigned int getId() const { return mId; }
     void setId(const long unsigned int id) { mId = id; }

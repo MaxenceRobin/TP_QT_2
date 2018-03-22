@@ -61,22 +61,24 @@ void AddResourcesToClientDialog::createResourcesList()
 {
     QList<Resource> resources;
 
-    for (QModelIndex & item : ui->resourcesTableView->selectionModel()->selectedRows())
-    {
-//        resources << Resource(item.child(0, 0).data(Qt::DisplayRole).toString(),
-//                              item.child(0, 1).data(Qt::DisplayRole).toString(),
-//                              item.child(0, 2).data(Qt::DisplayRole).toString());
+    emit newResourcesTest(ui->resourcesTableView->selectionModel()->selectedRows());
 
-        resources << Resource(ui->resourcesTableView->model()->index(item.row(), 1).data().toString(),
-                              ui->resourcesTableView->model()->index(item.row(), 2).data().toString(),
-                              ui->resourcesTableView->model()->index(item.row(), 3).data().toString(),
-                              ui->resourcesTableView->model()->index(item.row(), 0).data().toInt());
+//    for (QModelIndex & item : ui->resourcesTableView->selectionModel()->selectedRows())
+//    {
+////        resources << Resource(item.child(0, 0).data(Qt::DisplayRole).toString(),
+////                              item.child(0, 1).data(Qt::DisplayRole).toString(),
+////                              item.child(0, 2).data(Qt::DisplayRole).toString());
 
-        qDebug() << resources.last().getId()
-                 << resources.last().getFirstName()
-                 << resources.last().getLastName()
-                 << resources.last().getStaffType();
-    }
+//        resources << Resource(ui->resourcesTableView->model()->index(item.row(), 1).data().toString(),
+//                              ui->resourcesTableView->model()->index(item.row(), 2).data().toString(),
+//                              ui->resourcesTableView->model()->index(item.row(), 3).data().toString(),
+//                              ui->resourcesTableView->model()->index(item.row(), 0).data().toInt());
 
-    emit newResources(resources);
+//        qDebug() << resources.last().getId()
+//                 << resources.last().getFirstName()
+//                 << resources.last().getLastName()
+//                 << resources.last().getStaffType();
+//    }
+
+//    emit newResources(resources);
 }

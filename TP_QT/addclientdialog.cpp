@@ -40,12 +40,16 @@ AddClientDialog::AddClientDialog(QWidget *parent) :
     QValidator * phoneNumValidator = new QRegExpValidator(phoneNumRegExp, this);
     ui->phoneNumLineEdit->setValidator(phoneNumValidator);
 
-    if (ui->resourcesListView->selectionModel() == NULL)
+    if (ui->resourcesTableView->selectionModel() == NULL)
     {
         ui->moveDownRessourcesButton->setEnabled(false);
         ui->moveUpRessourcesButton->setEnabled(false);
         ui->deleteRessourcesButton->setEnabled(false);
     }
+
+    ui->resourcesTableView->setModel(DBManager::getResourcesModel());
+    ui->resourcesTableView->horizontalHeader()->hideSection(0);
+
 
     resourceDialog = new AddResourcesToClientDialog(this);
 }
@@ -99,14 +103,6 @@ void AddClientDialog::checkBeforeSubmit()
     accept();
 }
 
-void AddClientDialog::getNewResources(QList<Resource> resources)
+void AddClientDialog::getNewResources(QModelIndexList model)
 {
-    QAbstractItemModel & model = *ui->resourcesListView->model();
-
-    for (const Resource & resource : resources)
-    {
-//        const int row = model.rowCount();
-//        model.insertRow(row);
-//        model.setData(QModelIndex(row, ))
-    }
 }

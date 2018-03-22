@@ -108,25 +108,7 @@ void DBManager::addClient(const Client & client)
 
         for (const Resource & resource : client.getResources())
         {
-            QSqlQuery resourceIdQuery;
-
-            resourceIdQuery.prepare(
-                        "select R.Id "
-                        "from TRessource R, TType T "
-                        "where R.IdType = T.Id "
-                        "and R.Nom = :nom "
-                        "and R.Prenom = :prenom "
-                        "and T.Label = :label"
-                        );
-
-            resourceIdQuery.bindValue(":nom", resource.getLastName());
-            resourceIdQuery.bindValue(":prenom", resource.getFirstName());
-            resourceIdQuery.bindValue(":label", resource.getStaffType());
-
-            resourceIdQuery.exec();
-
-            resourceIdQuery.next();
-            unsigned int resourceId = resourceIdQuery.value(0).toInt();
+            unsigned int resourceId = resource.getId();
 
             QSqlQuery addRdvQuery;
 
