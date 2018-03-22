@@ -106,7 +106,13 @@ QStandardItemModel * DBManager::getNestedResourcesModel()
 
             while (getStaffByType.next())
             {
-                typeItem->appendRow(new QStandardItem(getStaffByType.value("Nom").toString()));
+                QStandardItem * staffItem = new QStandardItem(
+                            getStaffByType.value("Nom").toString() + " " +
+                            getStaffByType.value("Prenom").toString());
+
+                staffItem->setData(getStaffByType.value("Id").toInt());
+
+                typeItem->appendRow(staffItem);
             }
         }
 
