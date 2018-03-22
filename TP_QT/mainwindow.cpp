@@ -52,6 +52,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->toDateSearchDateEdit, &QDateEdit::dateChanged,
                      clientsProxyModel, &ClientsSortFilterProxyModel::setMaxDate);
 
+    QObject::connect(ui->resourcesTreeView, SIGNAL(doubleClicked(QModelIndex)),
+                     this, SLOT(showUpdateResource(QModelIndex)));
+
     //Sets the default dates
     on_resetPushButton_clicked();
 
@@ -84,6 +87,7 @@ void MainWindow::showAddClientDialog()
 
         if (clientsModel != nullptr)
             delete clientsModel;
+
         clientsModel = DBManager::getClientsModel();
     }
     else
@@ -98,16 +102,33 @@ void MainWindow::showAddClientDialog()
  */
 void MainWindow::showAddResourceDialog()
 {
-    AddResourceDialog staffDialog(UtilisationType::Create, this);
+    AddResourceDialog staffDialog(-1, this);
     if (staffDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un personnel.");
-        //refreshStaffView();
+        refreshStaffView();
     }
     else
         ui->statusBar->showMessage("Vous avez annulé l'ajout d'un personnel.");
 }
 
+/**
+ * @brief Displays the modal dialog window used to edit a resource
+ */
+void MainWindow::showUpdateResource(QModelIndex index)
+{
+    AddResourceDialog staffDialog(index.data(Qt::UserRole + 1).toInt(), this);
+
+    if (staffDialog.exec() == QDialog::Accepted)
+    {
+        ui->statusBar->showMessage("Vous avez édité un personnel.");
+        refreshStaffView();
+    }
+    else
+    {
+        ui->statusBar->showMessage("Vous avez annulé l'édition d'un personnel.");
+    }
+}
 
 /**
  * @brief Displays the modal about dialog window

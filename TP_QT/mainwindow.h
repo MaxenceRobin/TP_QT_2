@@ -32,6 +32,8 @@ private slots:
 
     void on_resetPushButton_clicked();
 
+    void showUpdateResource(QModelIndex index);
+
 private:
     void refreshStaffView();
     Ui::MainWindow *ui;
