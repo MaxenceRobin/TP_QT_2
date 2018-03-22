@@ -289,24 +289,12 @@ void DBManager::addITTech(const ITTech &itTech)
     }
 }
 
-<<<<<<< HEAD
 void DBManager::editResource(const Resource & resource)
-=======
-
-/**
- * @brief Checks if the accout exists in the database
- * @param login The login
- * @param password The password
- * @return true if the accont exists, false else
- */
-bool DBManager::checkAccount(const QString login, const QString password)
->>>>>>> origin/master
 {
     SelfManagedDatabase database;
 
     if (database.isOpen())
     {
-<<<<<<< HEAD
         QSqlQuery getTypeId;
 
         getTypeId.prepare(
@@ -324,20 +312,6 @@ bool DBManager::checkAccount(const QString login, const QString password)
 
         QSqlQuery updateResource;
 
-//        updateResource.prepare(
-//                            "update TRessource "
-//                            "set "
-//                            "Nom = ? "
-//                            "Prenom = ? "
-//                            "IdType = ? "
-//                            "where Id = ?"
-//                            );
-
-//        updateResource.addBindValue(resource.getLastName());
-//        updateResource.addBindValue(resource.getFirstName());
-//        updateResource.addBindValue(idType);
-//        updateResource.addBindValue(resource.getId());
-
         updateResource.prepare(
                     "update TRessource "
                     "set "
@@ -354,7 +328,20 @@ bool DBManager::checkAccount(const QString login, const QString password)
 
         updateResource.exec();
     }
-=======
+}
+
+/**
+ * @brief Checks if the accout exists in the database
+ * @param login The login
+ * @param password The password
+ * @return true if the accont exists, false else
+ */
+bool DBManager::checkAccount(const QString login, const QString password)
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
         QSqlQuery query;
         query.prepare("SELECT * FROM TCompte "
                       "WHERE Login = :login AND MdP = :mdp");
@@ -365,5 +352,4 @@ bool DBManager::checkAccount(const QString login, const QString password)
             return true;
     }
     return false;
->>>>>>> origin/master
 }
