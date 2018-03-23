@@ -30,6 +30,7 @@ public:
     static QSqlQueryModel * getResourcesTypesModel();
     static QStandardItemModel * getNestedResourcesModel();
     static Resource getResourceById(unsigned int id);
+    static Client getClientById(unsigned int id);
 
     static void addClient(const Client & client);
     static void addRessource(const Resource &resource);
@@ -37,6 +38,7 @@ public:
     static bool checkAccount(const QString login, const QString password);
 
 
+    static void editClient(const Client & client);
     static void editResource(const Resource &resource);
     static void editITTech(const ITTech & resource);
     static void deleteResource(const Resource &resource);

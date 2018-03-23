@@ -17,8 +17,8 @@
 #define ERROR_MSG_COMPULSORY_INPUT "Tous les champs obligatoires (*) doivent être complétés"
 
 
-AddClientDialog::AddClientDialog(QWidget *parent) :
-    QDialog(parent),
+AddClientDialog::AddClientDialog(int idClient, QWidget *parent) :
+    mIdClient(idClient), QDialog(parent),
     ui(new Ui::AddClientDialog)
 {
     ui->setupUi(this);
@@ -42,19 +42,60 @@ AddClientDialog::AddClientDialog(QWidget *parent) :
     QValidator * phoneNumValidator = new QRegExpValidator(phoneNumRegExp, this);
     ui->phoneNumLineEdit->setValidator(phoneNumValidator);
 
-    if (ui->resourcesTableView->selectionModel() == NULL)
-    {
-        ui->moveDownRessourcesButton->setEnabled(false);
-        ui->moveUpRessourcesButton->setEnabled(false);
-        ui->deleteRessourcesButton->setEnabled(false);
-    }
-
     ui->resourcesTableView->horizontalHeader()->hideSection(0);
 
 
     resourceDialog = new AddResourcesToClientDialog(this);
 
     QObject::connect(resourceDialog, SIGNAL(newResources(QList<Resource>)), this, SLOT(getNewResources(QList<Resource>)));
+
+    if (mIdClient != -1)
+    {
+        setWindowTitle("Editer un client");
+
+        Client client = DBManager::getClientById(mIdClient);
+
+        ui->nameLineEdit->setText(client.getLastName());
+        ui->firstNameLineEdit->setText(client.getFirstName());
+        ui->addressLineEdit->setText(client.getAddress());
+        ui->cityLineEdit->setText(client.getCity());
+        ui->postalCodeLineEdit->setText(QString::number(client.getPostalCode()));
+        ui->appointmentDayCalendar->setSelectedDate(client.getAppointmentDay());
+        ui->rdvDurationSpinBox->setValue(client.getAppointmentDuration());
+        ui->phoneNumLineEdit->setText(QString::number(client.getPhoneNumber()));
+        ui->prioritySpinBox->setValue(client.getPriority());
+        ui->commentTextEdit->setPlainText(client.getComment());
+
+        QStandardItemModel * model = new QStandardItemModel(this);
+
+        QStandardItem * root = model->invisibleRootItem();
+
+        unsigned int row = root->rowCount();
+
+        for (const Resource & resource : client.getResources())
+        {
+            QStandardItem * idItem =
+                    new QStandardItem((QString::number(resource.getId())));
+
+            QStandardItem * lastNameItem =
+                    new QStandardItem(resource.getLastName());
+
+            QStandardItem * firstNameItem =
+                    new QStandardItem(resource.getFirstName());
+
+            QStandardItem * typeItem =
+                    new QStandardItem(resource.getResourceType());
+
+            model->setItem(row, 0, idItem);
+            model->setItem(row, 1, lastNameItem);
+            model->setItem(row, 2, firstNameItem);
+            model->setItem(row, 3, typeItem);
+
+            row++;
+        }
+
+        ui->resourcesTableView->setModel(model);
+    }
 }
 
 AddClientDialog::~AddClientDialog()
@@ -69,6 +110,11 @@ AddClientDialog::~AddClientDialog()
  */
 void AddClientDialog::addResources()
 {
+    if (ui->resourcesTableView->model() != nullptr)
+    {
+        delete ui->resourcesTableView->model();
+    }
+
     resourceDialog->show();
 }
 
@@ -102,11 +148,46 @@ void AddClientDialog::checkBeforeSubmit()
                   ui->appointmentDayCalendar->selectedDate(),
                   ui->rdvDurationSpinBox->value(),
                   ui->prioritySpinBox->value(),
-                  QList<Resource>() << Resource("Dubois", "Jean", "Banquier A", 2)
-                                    << Resource("Ducroix", "Lisa", "Banquier B", 4)
+                  QList<Resource>()
                   );
 
-    DBManager::addClient(client);
+    QStandardItemModel * model;
+
+    QList<Resource> resources;
+
+    if (ui->resourcesTableView->model() != nullptr)
+    {
+        model = static_cast<QStandardItemModel*>(ui->resourcesTableView->model());
+    }
+    else
+    {
+        model = new QStandardItemModel(this);
+    }
+
+    for (int row = 0; row < model->rowCount(); row++)
+    {
+        Resource newResource(
+                    model->index(row, 1).data().toString(),
+                    model->index(row, 2).data().toString(),
+                    model->index(row, 3).data().toString(),
+                    model->index(row, 0).data().toInt()
+                    );
+
+        resources << newResource;
+    }
+
+    client.setResources(resources);
+
+    if (mIdClient == -1)
+    {
+        qDebug() << "ajout";
+        DBManager::addClient(client);
+    }
+    else
+    {
+        qDebug() << "edition";
+        DBManager::editClient(client);
+    }
 
     accept();
 }

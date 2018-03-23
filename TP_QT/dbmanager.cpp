@@ -175,8 +175,75 @@ Resource DBManager::getResourceById(unsigned int id)
 
         return newResource;
     }
+
+    return Resource();
 }
 
+Client DBManager::getClientById(unsigned int id)
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQuery getClient;
+
+        getClient.prepare(
+                    "select * "
+                    "from TClient "
+                    "where Id = :id"
+                    );
+
+        getClient.bindValue(":id", id);
+
+        getClient.exec();
+        getClient.next();
+
+        Client newClient(
+                    getClient.value("Nom").toString(),
+                    getClient.value("Prenom").toString(),
+                    getClient.value("Adresse").toString(),
+                    getClient.value("Ville").toString(),
+                    getClient.value("CP").toInt(),
+                    getClient.value("Commentaire").toString(),
+                    getClient.value("Tel").toInt(),
+                    getClient.value("DateRdv").toDate(),
+                    getClient.value("DureeRdv").toInt(),
+                    getClient.value("Priorite").toInt(),
+                    QList<Resource>(),
+                    id
+                    );
+
+        QList<Resource> resources;
+
+        QSqlQuery getResources;
+
+        getResources.prepare(
+                    "select IdRessource "
+                    "from TRdv "
+                    "where IdClient = :id"
+                    );
+
+        getResources.bindValue(":id", id);
+
+        getResources.exec();
+
+        qDebug() << "chargement des ressources";
+
+        while (getResources.next())
+        {
+            Resource newResource = DBManager::getResourceById(getResources.value("IdRessource").toInt());
+
+            qDebug() << newResource.getId();
+            resources << newResource;
+        }
+
+        newClient.setResources(resources);
+
+        return newClient;
+    }
+
+    return Client();
+}
 
 /**
  * @brief Creates a resource type model
@@ -230,7 +297,9 @@ void DBManager::addClient(const Client & client)
 
         addClientQuery.exec();
 
-        for (const Resource & resource : client.getResources())
+        QList<Resource> resources = client.getResources();
+
+        for (const Resource & resource : resources)
         {
             unsigned int resourceId = resource.getId();
 
@@ -325,6 +394,73 @@ void DBManager::addITTech(const ITTech &itTech)
     }
 }
 
+void DBManager::editClient(const Client &client)
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQuery removeRdv;
+
+        removeRdv.prepare(
+                    "delete from TRdv "
+                    "where IdClient = :id"
+                    );
+
+        removeRdv.bindValue(":id", client.getId());
+
+        removeRdv.exec();
+
+        QList<Resource> resources = client.getResources();
+
+        QSqlQuery addRdv;
+
+        for (const Resource & resource : resources)
+        {
+            addRdv.prepare(
+                        "insert into TRdv "
+                        "(IdClient, IdRessource) "
+                        "values "
+                        "(:idclient, :idres)"
+                        );
+
+            addRdv.bindValue(":idclient", client.getId());
+            addRdv.bindValue(":idres", resource.getId());
+
+            addRdv.exec();
+        }
+
+        QSqlQuery updateClient;
+
+        updateClient.prepare(
+                    "update TClient "
+                    "set "
+                    "Nom = :nom, "
+                    "Prenom = :prenom, "
+                    "Ville = :ville, "
+                    "CP = :cp, "
+                    "Commentaire = :commentaire, "
+                    "Tel = :tel, "
+                    "DateRdv = :date, "
+                    "DureeRdv = :duree, "
+                    "Priorite = :priorite "
+                    "where Id = :id"
+                    );
+
+        updateClient.bindValue(":nom", client.getLastName());
+        updateClient.bindValue(":prenom", client.getFirstName());
+        updateClient.bindValue(":ville", client.getCity());
+        updateClient.bindValue(":cp", client.getPostalCode());
+        updateClient.bindValue(":commentaire", client.getComment());
+        updateClient.bindValue(":tel", client.getPhoneNumber());
+        updateClient.bindValue(":date", client.getAppointmentDay());
+        updateClient.bindValue(":duree", client.getAppointmentDuration());
+        updateClient.bindValue(":priorite", client.getPriority());
+        updateClient.bindValue(":id", client.getId());
+
+        updateClient.exec();
+    }
+}
 
 /**
  * @brief Edits a resource in the database
@@ -336,6 +472,18 @@ void DBManager::editResource(const Resource & resource)
 
     if (database.isOpen())
     {
+        QSqlQuery removeAccount;
+
+        removeAccount.prepare(
+                    "delete from TCompte "
+                    "where IdRessource = :idres"
+                    );
+
+        removeAccount.bindValue(":idres", resource.getId());
+
+        removeAccount.exec();
+
+
         QSqlQuery getTypeId;
 
         getTypeId.prepare(
@@ -402,6 +550,27 @@ void DBManager::deleteResource(const Resource &resource)
 
 void DBManager::editITTech(const ITTech & resource)
 {
+    DBManager::editResource(resource);
+
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQuery createAccount;
+
+        createAccount.prepare(
+                    "insert into TCompte "
+                    "(IdRessource, Login, MdP) "
+                    "values "
+                    "(:idres, :login, :mdp)"
+                    );
+
+        createAccount.bindValue(":idres", resource.getId());
+        createAccount.bindValue(":login", resource.getLogin());
+        createAccount.bindValue(":mdp", resource.getPassword());
+
+        createAccount.exec();
+    }
 }
 
 /**

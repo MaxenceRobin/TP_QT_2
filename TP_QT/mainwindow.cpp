@@ -55,6 +55,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->resourcesTreeView, SIGNAL(doubleClicked(QModelIndex)),
                      this, SLOT(showUpdateResource(QModelIndex)));
 
+    QObject::connect(ui->clientTableView, SIGNAL(doubleClicked(QModelIndex)),
+                     this, SLOT(showUpdateClient(QModelIndex)));
+
     ui->deleteResourcePushButton->setEnabled(false);
     ui->deleteClientPushButton->setEnabled(false);
 
@@ -82,16 +85,12 @@ MainWindow::~MainWindow()
  */
 void MainWindow::showAddClientDialog()
 {
-    AddClientDialog clientDialog(this);
+    AddClientDialog clientDialog(-1, this);
 
     if (clientDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un client.");
 
-        if (clientsModel != nullptr)
-            delete clientsModel;
-
-        clientsModel = DBManager::getClientsModel();
         refreshClientsView();
     }
     else
@@ -114,6 +113,26 @@ void MainWindow::showAddResourceDialog()
     }
     else
         ui->statusBar->showMessage("Vous avez annulé l'ajout d'un personnel.");
+}
+
+/**
+ * @brief Displays the modal dialog window used to edit a client
+ */
+void MainWindow::showUpdateClient(QModelIndex index)
+{
+    const int id = ui->clientTableView->model()->index(index.row(), 0).data().toInt();
+
+    AddClientDialog clientDialog(id, this);
+
+    if (clientDialog.exec() == QDialog::Accepted)
+    {
+        ui->statusBar->showMessage("Vous avez édité un client.");
+        refreshClientsView();
+    }
+    else
+    {
+        ui->statusBar->showMessage("Vous avez annulé l'édition d'un client.");
+    }
 }
 
 /**

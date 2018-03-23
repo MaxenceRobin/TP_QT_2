@@ -15,11 +15,12 @@ class AddClientDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddClientDialog(QWidget *parent = 0);
+    explicit AddClientDialog(int idClient = -1, QWidget *parent = 0);
     ~AddClientDialog();
 
 private:
     Ui::AddClientDialog *ui;
+    int mIdClient;
     AddResourcesToClientDialog *resourceDialog;
 
 private slots:
