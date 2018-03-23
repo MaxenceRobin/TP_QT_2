@@ -132,21 +132,44 @@ void AddClientDialog::getNewResources(QList<Resource> resources)
 
     QStandardItem * root = model->invisibleRootItem();
 
+    unsigned int row = root->rowCount();
+
     for (const Resource & resource : resources)
     {
-        QStandardItem * resourceItem =
-                new QStandardItem(QString::number(resource.getId()));
+        QStandardItem * idItem =
+                new QStandardItem((QString::number(resource.getId())));
 
-        resourceItem->appendRow(
-                    QList<QStandardItem*>()
-                    << new QStandardItem(resource.getLastName())
-                    << new QStandardItem(resource.getFirstName())
-                    << new QStandardItem(resource.getResourceType())
-                    );
+        QStandardItem * lastNameItem =
+                new QStandardItem(resource.getLastName());
 
-        qDebug() << resourceItem;
+        QStandardItem * firstNameItem =
+                new QStandardItem(resource.getFirstName());
 
-        root->appendRow(resourceItem);
+        QStandardItem * typeItem =
+                new QStandardItem(resource.getResourceType());
+
+        model->setItem(row, 0, idItem);
+        model->setItem(row, 1, lastNameItem);
+        model->setItem(row, 2, firstNameItem);
+        model->setItem(row, 3, typeItem);
+
+        row++;
+
+//        QStandardItem * resourceItem =
+//                new QStandardItem(QString::number(resource.getId()));
+
+//        resourceItem->appendColumn(
+//                    QList<QStandardItem*>()
+//                    << new QStandardItem(resource.getLastName())
+//                    << new QStandardItem(resource.getFirstName())
+//                    << new QStandardItem(resource.getResourceType())
+//                    );
+
+//        qDebug() << resourceItem;
+
+//        root->appendRow(resourceItem);
     }
+
+    ui->resourcesTableView->setModel(model);
 }
 
