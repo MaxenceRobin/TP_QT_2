@@ -30,6 +30,7 @@ public:
     static QSqlQueryModel * getResourcesTypesModel();
     static QStandardItemModel * getNestedResourcesModel();
     static Resource getResourceById(unsigned int id);
+    static Client getClientById(unsigned int id);
 
     static void addClient(const Client & client);
     static void addRessource(const Resource &resource);

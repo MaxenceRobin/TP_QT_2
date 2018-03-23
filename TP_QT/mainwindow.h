@@ -34,6 +34,8 @@ private slots:
 
     void showUpdateResource(QModelIndex index);
 
+    void showUpdateClient(QModelIndex index);
+
     void on_deleteResourcePushButton_clicked();
 
     void on_resourcesTreeView_clicked(const QModelIndex &index);

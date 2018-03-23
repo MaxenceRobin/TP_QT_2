@@ -17,7 +17,7 @@
 #define ERROR_MSG_COMPULSORY_INPUT "Tous les champs obligatoires (*) doivent être complétés"
 
 
-AddClientDialog::AddClientDialog(QWidget *parent) :
+AddClientDialog::AddClientDialog(int idResource, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddClientDialog)
 {
@@ -55,6 +55,52 @@ AddClientDialog::AddClientDialog(QWidget *parent) :
     resourceDialog = new AddResourcesToClientDialog(this);
 
     QObject::connect(resourceDialog, SIGNAL(newResources(QList<Resource>)), this, SLOT(getNewResources(QList<Resource>)));
+
+    if (idResource != -1)
+    {
+        Client client = DBManager::getClientById(idResource);
+
+        ui->nameLineEdit->setText(client.getLastName());
+        ui->firstNameLineEdit->setText(client.getFirstName());
+        ui->addressLineEdit->setText(client.getAddress());
+        ui->cityLineEdit->setText(client.getCity());
+        ui->postalCodeLineEdit->setText(QString::number(client.getPostalCode()));
+        ui->appointmentDayCalendar->setSelectedDate(client.getAppointmentDay());
+        ui->rdvDurationSpinBox->setValue(client.getAppointmentDuration());
+        ui->phoneNumLineEdit->setText(QString::number(client.getPhoneNumber()));
+        ui->prioritySpinBox->setValue(client.getPriority());
+        ui->commentTextEdit->setPlainText(client.getComment());
+
+        QStandardItemModel * model = new QStandardItemModel(this);
+
+        QStandardItem * root = model->invisibleRootItem();
+
+        unsigned int row = root->rowCount();
+
+        for (const Resource & resource : client.getResources())
+        {
+            QStandardItem * idItem =
+                    new QStandardItem((QString::number(resource.getId())));
+
+            QStandardItem * lastNameItem =
+                    new QStandardItem(resource.getLastName());
+
+            QStandardItem * firstNameItem =
+                    new QStandardItem(resource.getFirstName());
+
+            QStandardItem * typeItem =
+                    new QStandardItem(resource.getResourceType());
+
+            model->setItem(row, 0, idItem);
+            model->setItem(row, 1, lastNameItem);
+            model->setItem(row, 2, firstNameItem);
+            model->setItem(row, 3, typeItem);
+
+            row++;
+        }
+
+        ui->resourcesTableView->setModel(model);
+    }
 }
 
 AddClientDialog::~AddClientDialog()

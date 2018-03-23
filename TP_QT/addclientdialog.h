@@ -15,7 +15,7 @@ class AddClientDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddClientDialog(QWidget *parent = 0);
+    explicit AddClientDialog(int idResource = -1, QWidget *parent = 0);
     ~AddClientDialog();
 
 private:
