@@ -30,4 +30,14 @@ public:
     void setResourceType(const QString resourceType) { mResourceType = resourceType; }
 };
 
+inline bool operator==(const Resource & first, const Resource & second)
+{
+    return first.getId() == second.getId();
+}
+
+inline uint qHash(const Resource & resource)
+{
+    return resource.getId();
+}
+
 #endif // STAFF_H
