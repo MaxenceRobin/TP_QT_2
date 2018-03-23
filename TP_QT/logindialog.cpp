@@ -12,6 +12,9 @@ LoginDialog::LoginDialog(QWidget *parent) :
     ui(new Ui::LoginDialog)
 {
     ui->setupUi(this);
+    //Question 2
+    ui->loginLineEditI->setText("val");
+    //Question 2 end
     setFixedSize(sizeHint());
 }
 

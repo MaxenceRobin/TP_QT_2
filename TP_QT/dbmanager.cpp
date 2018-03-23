@@ -621,3 +621,28 @@ void DBManager::deleteClient(unsigned int clientId)
         deleteClientQuery.exec();
     }
 }
+
+/**
+ * @brief Question 10
+ */
+QList<Client> * DBManager::getClients()
+{
+    QList<Client> * clients = new QList<Client>();
+
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQuery getClient(
+                    "select * "
+                    "from TClient"
+                    );
+
+        while (getClient.next())
+        {
+            *clients << DBManager::getClientById(getClient.value("Id").toInt());
+        }
+
+        return clients;
+    }
+}

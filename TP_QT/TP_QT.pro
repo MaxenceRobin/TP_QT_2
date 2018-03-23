@@ -40,7 +40,8 @@ SOURCES += \
     selfmanageddatabase.cpp \
     resource.cpp \
     addresourcedialog.cpp \
-    clientssortfilterproxymodel.cpp
+    clientssortfilterproxymodel.cpp \
+    addlifeinsurerdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -56,7 +57,8 @@ HEADERS += \
     selfmanageddatabase.h \
     resource.h \
     addresourcedialog.h \
-    clientssortfilterproxymodel.h
+    clientssortfilterproxymodel.h \
+    addlifeinsurerdialog.h
 
 FORMS += \
         mainwindow.ui \
@@ -64,7 +66,8 @@ FORMS += \
     addclientdialog.ui \
     aboutdialog.ui \
     addresourcestoclientdialog.ui \
-    addresourcedialog.ui
+    addresourcedialog.ui \
+    addlifeinsurerdialog.ui
 
 RESOURCES += \
     ressources.qrc

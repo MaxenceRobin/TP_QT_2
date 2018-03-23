@@ -6,6 +6,7 @@
 #include "addresourcedialog.h"
 #include "aboutdialog.h"
 #include "clientssortfilterproxymodel.h"
+#include "addlifeinsurerdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -44,9 +45,24 @@ private slots:
 
     void on_clientTableView_clicked(const QModelIndex &index);
 
+    void updateStatusMessage();
+
+
+
+    //Question 3
+    void showAddLifeInsurerDialog();
+
+    //Question 10
+    void on_exportClientButton_clicked();
+
+public:
+    void closeEvent(QCloseEvent *event);
+
 private:
     void refreshResourceView();
     void refreshClientsView();
+    //Question 5
+    unsigned int nbrOfDeletedRecords;
     Ui::MainWindow *ui;
     QSqlQueryModel *clientsModel;
     ClientsSortFilterProxyModel *clientsProxyModel;

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Ajouter client</string>
+   <string>Données du client</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -257,6 +257,9 @@
            <property name="suffix">
             <string> min</string>
            </property>
+           <property name="minimum">
+            <number>10</number>
+           </property>
            <property name="maximum">
             <number>1440</number>
            </property>
@@ -337,6 +340,16 @@
      </item>
      <item>
       <widget class="QTextEdit" name="commentTextEdit"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Divers</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="diverseTextEdit"/>
      </item>
     </layout>
    </item>
@@ -420,7 +433,7 @@
    <slot>checkBeforeSubmit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>785</x>
+     <x>698</x>
      <y>541</y>
     </hint>
     <hint type="destinationlabel">
@@ -436,7 +449,7 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>698</x>
+     <x>785</x>
      <y>541</y>
     </hint>
     <hint type="destinationlabel">
@@ -452,8 +465,8 @@
    <slot>addResources()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>426</x>
-     <y>255</y>
+     <x>442</x>
+     <y>191</y>
     </hint>
     <hint type="destinationlabel">
      <x>398</x>

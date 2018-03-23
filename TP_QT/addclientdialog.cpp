@@ -9,7 +9,7 @@
 //Regular expression to control inputs
 #define NAME_REG_EXP "[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ]*((-|\\s)[A-ZÀ-ÖØ-Ý][a-zà-öø-ÿ]*)*"
 #define FR_POSTAL_CODE_REG_EXP "[0-9]{5}"
-#define FR_PHONE_NUMBER_REG_EXP "[0-9]{10}"
+#define FR_PHONE_NUMBER_REG_EXP "0[0-9]{9}"
 
 //Input error messages
 #define ERROR_MSG_CODE_POSTAL_INPUT "Code postal incorrect - Doit être composé de 5 chiffres"
@@ -51,7 +51,7 @@ AddClientDialog::AddClientDialog(int idClient, QWidget *parent) :
 
     if (mIdClient != -1)
     {
-        setWindowTitle("Editer un client");
+        //setWindowTitle("Editer un client");
 
         Client client = DBManager::getClientById(mIdClient);
 
@@ -138,12 +138,15 @@ void AddClientDialog::checkBeforeSubmit()
         return;
     }
 
+    //Question 4
+    QString clientComments = ui->commentTextEdit->toPlainText() + "\n\n" + ui->diverseTextEdit->toPlainText();
+
     Client client(ui->nameLineEdit->text(),
                   ui->firstNameLineEdit->text(),
                   ui->addressLineEdit->text(),
                   ui->cityLineEdit->text(),
                   ui->postalCodeLineEdit->text().toInt(),
-                  ui->commentTextEdit->toPlainText(),
+                  clientComments,                           //Question 4
                   ui->phoneNumLineEdit->text().toInt(),
                   ui->appointmentDayCalendar->selectedDate(),
                   ui->rdvDurationSpinBox->value(),
@@ -180,12 +183,12 @@ void AddClientDialog::checkBeforeSubmit()
 
     if (mIdClient == -1)
     {
-        qDebug() << "ajout";
         DBManager::addClient(client);
+
+        emit clientAdded();
     }
     else
     {
-        qDebug() << "edition";
         DBManager::editClient(client);
     }
 

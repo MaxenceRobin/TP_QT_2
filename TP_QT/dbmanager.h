@@ -26,6 +26,7 @@ public:
     static const int INDEX_DATE_COL_CLIENTS_MODEL;
 
     static QSqlQueryModel * getClientsModel();
+    static QList<Client> * getClients();
     static QSqlQueryModel * getResourcesModel();
     static QSqlQueryModel * getResourcesTypesModel();
     static QStandardItemModel * getNestedResourcesModel();

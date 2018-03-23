@@ -274,6 +274,13 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="exportClientButton">
+              <property name="text">
+               <string>exporter</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -349,6 +356,8 @@
      </property>
      <addaction name="addClientAction"/>
      <addaction name="addResourceAction"/>
+     <addaction name="separator"/>
+     <addaction name="actionAssureur_vie"/>
     </widget>
     <addaction name="addMenu"/>
     <addaction name="separator"/>
@@ -415,6 +424,11 @@
    </property>
    <property name="text">
     <string>A propos</string>
+   </property>
+  </action>
+  <action name="actionAssureur_vie">
+   <property name="text">
+    <string>Assureur vie</string>
    </property>
   </action>
  </widget>
@@ -496,10 +510,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionAssureur_vie</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showAddLifeInsurerDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAddClientDialog()</slot>
   <slot>showAddResourceDialog()</slot>
   <slot>showAboutDialog()</slot>
+  <slot>showAddLifeInsurerDialog()</slot>
+  <slot>showNbrDeletedRecordsBeforeExit()</slot>
  </slots>
 </ui>

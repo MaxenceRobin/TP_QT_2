@@ -17,7 +17,7 @@
  */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow), nbrOfDeletedRecords(0)
 {
     ui->setupUi(this);
     ui->statusBar->showMessage("Vous êtes connecté.");
@@ -37,8 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //Sets the clientTableView model and filter
     clientsModel = DBManager::getClientsModel();
     clientsProxyModel = new ClientsSortFilterProxyModel(this);
-    clientsProxyModel->setSourceModel(clientsModel);
+//    clientsProxyModel->setSourceModel(clientsModel);
     ui->clientTableView->setModel(clientsProxyModel);
+    refreshClientsView();
 
     //Connects the text/dateChanged signals to the proxy model
     QObject::connect(ui->idSearchLineEdit, &QLineEdit::textChanged,
@@ -57,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect(ui->clientTableView, SIGNAL(doubleClicked(QModelIndex)),
                      this, SLOT(showUpdateClient(QModelIndex)));
+
 
     ui->deleteResourcePushButton->setEnabled(false);
     ui->deleteClientPushButton->setEnabled(false);
@@ -87,9 +89,11 @@ void MainWindow::showAddClientDialog()
 {
     AddClientDialog clientDialog(-1, this);
 
+    connect(&clientDialog, SIGNAL(clientAdded()), this, SLOT(updateStatusMessage()));
+
     if (clientDialog.exec() == QDialog::Accepted)
     {
-        ui->statusBar->showMessage("Vous avez ajouté un client.");
+        //ui->statusBar->showMessage("Vous avez ajouté un client."); Question 7
 
         refreshClientsView();
     }
@@ -97,6 +101,14 @@ void MainWindow::showAddClientDialog()
     {
         ui->statusBar->showMessage("Vous avez annulé l'ajout d'un client.");
     }
+}
+
+/**
+ * @brief Question 7
+ */
+void MainWindow::updateStatusMessage()
+{
+    ui->statusBar->showMessage("Vous avez ajouté un client.");
 }
 
 
@@ -208,6 +220,9 @@ void MainWindow::refreshClientsView()
         delete clientsModel;
     clientsModel = DBManager::getClientsModel();
     clientsProxyModel->setSourceModel(clientsModel);
+
+    // Question 6;
+    ui->clientTableView->sortByColumn(8, Qt::AscendingOrder);
 }
 
 
@@ -248,6 +263,8 @@ void MainWindow::on_deleteResourcePushButton_clicked()
             DBManager::deleteResource(resourceToDelete);
             refreshResourceView();
             ui->statusBar->showMessage("Vous avez supprimé un personnel.");
+            //Question 5
+            nbrOfDeletedRecords++;
         }
     }
 }
@@ -288,6 +305,8 @@ void MainWindow::on_deleteClientPushButton_clicked()
             ui->deleteClientPushButton->setEnabled(false);
             refreshClientsView();
             ui->statusBar->showMessage("Vous avez supprimé un client.");
+            //Question 5
+            nbrOfDeletedRecords++;
         }
     }
 }
@@ -302,4 +321,71 @@ void MainWindow::on_clientTableView_clicked(const QModelIndex &index)
         ui->deleteClientPushButton->setEnabled(true);
     else
         ui->deleteClientPushButton->setEnabled(false);
+}
+
+/**
+ * @brief Question 3
+ */
+void MainWindow::showAddLifeInsurerDialog()
+{
+    AddLifeInsurerDialog dialog(this);
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        ui->statusBar->showMessage("Vous avez ajouté un assureur vie.");
+        refreshResourceView();
+    }
+    else
+    {
+        ui->statusBar->showMessage("Vous avez annulé l'ajout d'un assureur vie.");
+    }
+}
+
+
+/**
+ * @brief Question 5
+ * @param event
+ */
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    QMessageBox::information(this, "Nombre d'enregistrements supprimés", QString::number(nbrOfDeletedRecords) + " enregistrement(s) supprimé(s)");
+    QMainWindow::closeEvent(event);
+}
+
+/**
+ * @brief Question 10
+ */
+void MainWindow::on_exportClientButton_clicked()
+{
+    QString filePath = QFileDialog::getSaveFileName(this, "Exporter client", QDir::homePath(), "Fichier XML (*.xml)");
+
+    QFile file(filePath);
+
+    if (file.open(QFile::Text | QFile::WriteOnly))
+    {
+        QString fileContent = "<TClient>\n";
+
+        QList<Client> * clients = DBManager::getClients();
+
+        for (const Client & client : *clients)
+        {
+            fileContent += QString("<Client id=\"%1\">\n"
+                           "\t<Nom>%2</Nom>\n"
+                           "\t<Prenom>%3</Prenom>\n"
+                           "</Client>\n")
+                    .arg(QString::number(client.getId()))
+                    .arg(client.getLastName())
+                    .arg(client.getFirstName());
+        }
+
+        delete clients;
+
+        fileContent += "</TClient>";
+
+        QDataStream writer(&file);
+
+        writer << fileContent;
+
+        file.close();
+    }
 }
