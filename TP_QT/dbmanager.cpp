@@ -227,6 +227,8 @@ Client DBManager::getClientById(unsigned int id)
 
         getResources.exec();
 
+        qDebug() << "chargement des ressources";
+
         while (getResources.next())
         {
             Resource newResource = DBManager::getResourceById(getResources.value("IdRessource").toInt());
@@ -295,7 +297,9 @@ void DBManager::addClient(const Client & client)
 
         addClientQuery.exec();
 
-        for (const Resource & resource : client.getResources())
+        QList<Resource> resources = client.getResources();
+
+        for (const Resource & resource : resources)
         {
             unsigned int resourceId = resource.getId();
 
@@ -390,6 +394,73 @@ void DBManager::addITTech(const ITTech &itTech)
     }
 }
 
+void DBManager::editClient(const Client &client)
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQuery removeRdv;
+
+        removeRdv.prepare(
+                    "delete from TRdv "
+                    "where IdClient = :id"
+                    );
+
+        removeRdv.bindValue(":id", client.getId());
+
+        removeRdv.exec();
+
+        QList<Resource> resources = client.getResources();
+
+        QSqlQuery addRdv;
+
+        for (const Resource & resource : resources)
+        {
+            addRdv.prepare(
+                        "insert into TRdv "
+                        "(IdClient, IdRessource) "
+                        "values "
+                        "(:idclient, :idres)"
+                        );
+
+            addRdv.bindValue(":idclient", client.getId());
+            addRdv.bindValue(":idres", resource.getId());
+
+            addRdv.exec();
+        }
+
+        QSqlQuery updateClient;
+
+        updateClient.prepare(
+                    "update TClient "
+                    "set "
+                    "Nom = :nom, "
+                    "Prenom = :prenom, "
+                    "Ville = :ville, "
+                    "CP = :cp, "
+                    "Commentaire = :commentaire, "
+                    "Tel = :tel, "
+                    "DateRdv = :date, "
+                    "DureeRdv = :duree, "
+                    "Priorite = :priorite "
+                    "where Id = :id"
+                    );
+
+        updateClient.bindValue(":nom", client.getLastName());
+        updateClient.bindValue(":prenom", client.getFirstName());
+        updateClient.bindValue(":ville", client.getCity());
+        updateClient.bindValue(":cp", client.getPostalCode());
+        updateClient.bindValue(":commentaire", client.getComment());
+        updateClient.bindValue(":tel", client.getPhoneNumber());
+        updateClient.bindValue(":date", client.getAppointmentDay());
+        updateClient.bindValue(":duree", client.getAppointmentDuration());
+        updateClient.bindValue(":priorite", client.getPriority());
+        updateClient.bindValue(":id", client.getId());
+
+        updateClient.exec();
+    }
+}
 
 /**
  * @brief Edits a resource in the database
