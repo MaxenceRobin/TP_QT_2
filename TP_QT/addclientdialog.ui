@@ -307,48 +307,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="moveUpRessourcesButton">
-         <property name="toolTip">
-          <string>Remonter la ressource dans la liste</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="ressources.qrc">
-           <normaloff>:/moveDown</normaloff>:/moveDown</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="moveDownRessourcesButton">
-         <property name="toolTip">
-          <string>Redescendre la ressource dans la liste</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="ressources.qrc">
-           <normaloff>:/moveUp</normaloff>:/moveUp</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="deleteRessourcesButton">
-         <property name="toolTip">
-          <string>Supprimer la ressource de la liste</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="ressources.qrc">
-           <normaloff>:/delete</normaloff>:/delete</iconset>
-         </property>
-        </widget>
-       </item>
-       <item>
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -447,9 +405,6 @@
   <tabstop>prioritySpinBox</tabstop>
   <tabstop>resourcesTableView</tabstop>
   <tabstop>addResourcesButton</tabstop>
-  <tabstop>moveUpRessourcesButton</tabstop>
-  <tabstop>moveDownRessourcesButton</tabstop>
-  <tabstop>deleteRessourcesButton</tabstop>
   <tabstop>commentTextEdit</tabstop>
   <tabstop>okButton</tabstop>
   <tabstop>cancelButton</tabstop>
