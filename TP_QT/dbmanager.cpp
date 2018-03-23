@@ -295,6 +295,18 @@ void DBManager::editResource(const Resource & resource)
 
     if (database.isOpen())
     {
+        // If an account link to this resource exist, is has to be removed
+        QSqlQuery removeAccount;
+
+        removeAccount.prepare(
+                    "delete from TCompte "
+                    "where IdRessource = :idres"
+                    );
+
+        removeAccount.bindValue(":idres", resource.getId());
+
+        removeAccount.exec();
+
         QSqlQuery getTypeId;
 
         getTypeId.prepare(
@@ -330,8 +342,6 @@ void DBManager::editResource(const Resource & resource)
     }
 }
 
-<<<<<<< HEAD
-
 /**
  * @brief Deletes the specified resource from the database
  * @param resource The resource to delete
@@ -359,13 +369,31 @@ void DBManager::deleteResource(const Resource &resource)
     }
 }
 
-
-=======
 void DBManager::editITTech(const ITTech & resource)
 {
+    editResource(resource);
+
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        QSqlQuery createAccount;
+
+        createAccount.prepare(
+                    "insert into TCompte "
+                    "(IdRessource, Login, MdP) "
+                    "values "
+                    "(:idres, :login, :mdp)"
+                    );
+
+        createAccount.bindValue(":idres", resource.getId());
+        createAccount.bindValue(":login", resource.getLogin());
+        createAccount.bindValue(":mdp", resource.getPassword());
+
+        createAccount.exec();
+    }
 }
 
->>>>>>> f2fe462cd730939c5a0b88c7923ac1a8a737532b
 /**
  * @brief Checks if the accout exists in the database
  * @param login The login
