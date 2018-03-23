@@ -36,7 +36,9 @@ public:
     static void addITTech(const ITTech &itTech);
     static bool checkAccount(const QString login, const QString password);
 
-    static void editResource(const Resource & resource);
+    static void editResource(const Resource &resource);
+
+    static void deleteResource(const Resource &resource);
 
 private:
 

@@ -107,7 +107,7 @@ void MainWindow::showAddResourceDialog()
     if (staffDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez ajouté un personnel.");
-        refreshStaffView();
+        refreshResourceView();
     }
     else
         ui->statusBar->showMessage("Vous avez annulé l'ajout d'un personnel.");
@@ -123,7 +123,7 @@ void MainWindow::showUpdateResource(QModelIndex index)
     if (staffDialog.exec() == QDialog::Accepted)
     {
         ui->statusBar->showMessage("Vous avez édité un personnel.");
-        refreshStaffView();
+        refreshResourceView();
     }
     else
     {
@@ -201,3 +201,23 @@ void MainWindow::on_resetPushButton_clicked()
     ui->lastNameSearchLineEdit->clear();
     ui->idSearchLineEdit->clear();
 }
+
+
+void MainWindow::on_deleteResourcePushButton_clicked()
+{
+    if (ui->resourcesTreeView->selectionModel()->hasSelection())
+    {
+        QMessageBox::StandardButton confirmDelete;
+        confirmDelete = QMessageBox::question(this, "Confirmation suppression",
+                "Souhaitez-vous supprimer " + ui->resourcesTreeView->selectionModel()->currentIndex().data().toString() + " ?",
+                QMessageBox::Yes|QMessageBox::No);
+        if (confirmDelete == QMessageBox::Yes)
+        {
+            Resource resourceToDelete = DBManager::getResourceById(ui->resourcesTreeView->selectionModel()->currentIndex().data(Qt::UserRole + 1).toInt());
+            DBManager::deleteResource(resourceToDelete);
+            refreshResourceView();
+        }
+    }
+}
+
+

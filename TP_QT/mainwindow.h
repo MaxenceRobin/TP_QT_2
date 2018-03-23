@@ -34,6 +34,8 @@ private slots:
 
     void showUpdateResource(QModelIndex index);
 
+    void on_deleteResourcePushButton_clicked();
+
 private:
     void refreshResourceView();
     void refreshClientsView();

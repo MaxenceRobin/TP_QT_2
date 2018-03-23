@@ -330,6 +330,35 @@ void DBManager::editResource(const Resource & resource)
     }
 }
 
+
+/**
+ * @brief Deletes the specified resource from the database
+ * @param resource The resource to delete
+ */
+void DBManager::deleteResource(const Resource &resource)
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        //Deletes the account if the resource is an IT Tehnician
+        if (resource.getResourceType() == ITTech::RESOURCE_TYPE_IT_TECH)
+        {
+            QSqlQuery deleteAccountQuery;
+            deleteAccountQuery.prepare("DELETE FROM TCompte WHERE IdRessource = :idRessource");
+            deleteAccountQuery.bindValue(":idRessource", resource.getId());
+            deleteAccountQuery.exec();
+        }
+
+        //Deletes the resource
+        QSqlQuery deleteResourceQuery;
+        deleteResourceQuery.prepare("DELETE FROM TRessource WHERE Id = :id");
+        deleteResourceQuery.bindValue(":id", resource.getId());
+        deleteResourceQuery.exec();
+    }
+}
+
+
 /**
  * @brief Checks if the accout exists in the database
  * @param login The login
