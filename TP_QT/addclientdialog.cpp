@@ -67,11 +67,6 @@ AddClientDialog::~AddClientDialog()
 
 void AddClientDialog::addResources()
 {
-    if (ui->resourcesTableView->model() != nullptr)
-    {
-        delete ui->resourcesTableView->model();
-    }
-
     resourceDialog->show();
 }
 
@@ -117,8 +112,6 @@ void AddClientDialog::checkBeforeSubmit()
 void AddClientDialog::getNewResources(QList<Resource> resources)
 {
     // Removes the duplicates
-    //resources = resources.toSet().toList();
-
     QStandardItemModel * model;
 
     if (ui->resourcesTableView->model() != nullptr)
@@ -129,6 +122,22 @@ void AddClientDialog::getNewResources(QList<Resource> resources)
     {
         model = new QStandardItemModel(this);
     }
+
+    for (int row = 0; row < model->rowCount(); row++)
+    {
+        Resource newResource(
+                    model->index(row, 1).data().toString(),
+                    model->index(row, 2).data().toString(),
+                    model->index(row, 3).data().toString(),
+                    model->index(row, 0).data().toInt()
+                    );
+
+        resources << newResource;
+    }
+
+    resources = resources.toSet().toList();
+
+    model->clear();
 
     QStandardItem * root = model->invisibleRootItem();
 
@@ -154,20 +163,6 @@ void AddClientDialog::getNewResources(QList<Resource> resources)
         model->setItem(row, 3, typeItem);
 
         row++;
-
-//        QStandardItem * resourceItem =
-//                new QStandardItem(QString::number(resource.getId()));
-
-//        resourceItem->appendColumn(
-//                    QList<QStandardItem*>()
-//                    << new QStandardItem(resource.getLastName())
-//                    << new QStandardItem(resource.getFirstName())
-//                    << new QStandardItem(resource.getResourceType())
-//                    );
-
-//        qDebug() << resourceItem;
-
-//        root->appendRow(resourceItem);
     }
 
     ui->resourcesTableView->setModel(model);
