@@ -57,28 +57,28 @@ void AddResourcesToClientDialog::on_resourcesTableView_clicked(const QModelIndex
         ui->addButton->setEnabled(false);
 }
 
-//void AddResourcesToClientDialog::createResourcesList()
-//{
-    //QList<Resource> resources;
+void AddResourcesToClientDialog::createResourcesList()
+{
+    QList<Resource> resources;
 
     //emit newResourcesTest(ui->resourcesTableView->selectionModel()->selectedRows());
 
-//    for (QModelIndex & item : ui->resourcesTableView->selectionModel()->selectedRows())
-//    {
-////        resources << Resource(item.child(0, 0).data(Qt::DisplayRole).toString(),
-////                              item.child(0, 1).data(Qt::DisplayRole).toString(),
-////                              item.child(0, 2).data(Qt::DisplayRole).toString());
+    for (QModelIndex & item : ui->resourcesTableView->selectionModel()->selectedRows())
+    {
+//        resources << Resource(item.child(0, 0).data(Qt::DisplayRole).toString(),
+//                              item.child(0, 1).data(Qt::DisplayRole).toString(),
+//                              item.child(0, 2).data(Qt::DisplayRole).toString());
 
-//        resources << Resource(ui->resourcesTableView->model()->index(item.row(), 1).data().toString(),
-//                              ui->resourcesTableView->model()->index(item.row(), 2).data().toString(),
-//                              ui->resourcesTableView->model()->index(item.row(), 3).data().toString(),
-//                              ui->resourcesTableView->model()->index(item.row(), 0).data().toInt());
+        resources << Resource(ui->resourcesTableView->model()->index(item.row(), 1).data().toString(),
+                              ui->resourcesTableView->model()->index(item.row(), 2).data().toString(),
+                              ui->resourcesTableView->model()->index(item.row(), 3).data().toString(),
+                              ui->resourcesTableView->model()->index(item.row(), 0).data().toInt());
 
-//        qDebug() << resources.last().getId()
-//                 << resources.last().getFirstName()
-//                 << resources.last().getLastName()
-//                 << resources.last().getStaffType();
-//    }
+        qDebug() << resources.last().getId()
+                 << resources.last().getFirstName()
+                 << resources.last().getLastName()
+                 << resources.last().getResourceType();
+    }
 
-//    emit newResources(resources);
-//}
+    emit newResources(resources);
+}

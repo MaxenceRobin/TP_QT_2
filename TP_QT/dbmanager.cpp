@@ -330,6 +330,7 @@ void DBManager::editResource(const Resource & resource)
     }
 }
 
+<<<<<<< HEAD
 
 /**
  * @brief Deletes the specified resource from the database
@@ -359,6 +360,12 @@ void DBManager::deleteResource(const Resource &resource)
 }
 
 
+=======
+void DBManager::editITTech(const ITTech & resource)
+{
+}
+
+>>>>>>> f2fe462cd730939c5a0b88c7923ac1a8a737532b
 /**
  * @brief Checks if the accout exists in the database
  * @param login The login

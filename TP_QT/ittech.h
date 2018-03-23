@@ -17,7 +17,9 @@ public:
     static const QString RESOURCE_TYPE_IT_TECH;
     //Constructors
     ITTech();
-    ITTech(const QString lastName, const QString firstName, const QString login, const QString password);
+    ITTech(const QString lastName, const QString firstName,
+           const QString login, const QString password,
+           unsigned int idResource = -1);
 
     /**
      * @return The IT Technician's login
