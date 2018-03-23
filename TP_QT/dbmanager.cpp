@@ -17,6 +17,12 @@ const int DBManager::INDEX_LNAME_COL_CLIENTS_MODEL = 1;
 const int DBManager::INDEX_FNAME_COL_CLIENTS_MODEL = 2;
 const int DBManager::INDEX_DATE_COL_CLIENTS_MODEL = 8;
 
+
+/**
+ * @brief Returns the max ID of the table
+ * @param tableName The name of the table
+ * @return The max ID of the table
+ */
 int DBManager::getMaxId(QString tableName)
 {
     QString queryString = ("SELECT MAX(Id) FROM " + tableName);
@@ -27,6 +33,10 @@ int DBManager::getMaxId(QString tableName)
 }
 
 
+/**
+ * @brief Creates a clients model
+ * @return A clients model
+ */
 QSqlQueryModel * DBManager::getClientsModel()
 {
     SelfManagedDatabase database;
@@ -46,6 +56,11 @@ QSqlQueryModel * DBManager::getClientsModel()
     return new QSqlQueryModel;
 }
 
+
+/**
+ * @brief Creates a resources model
+ * @return A resources model
+ */
 QSqlQueryModel * DBManager::getResourcesModel()
 {
     SelfManagedDatabase database;
@@ -66,6 +81,11 @@ QSqlQueryModel * DBManager::getResourcesModel()
     return new QSqlQueryModel;
 }
 
+
+/**
+ * @brief Gets a nested resources model
+ * @return A nested resources model
+ */
 QStandardItemModel * DBManager::getNestedResourcesModel()
 {
     SelfManagedDatabase database;
@@ -121,6 +141,12 @@ QStandardItemModel * DBManager::getNestedResourcesModel()
     return new QStandardItemModel;
 }
 
+
+/**
+ * @brief Gets a Resource from the database using it's id
+ * @param id The resorce's ID
+ * @return The resource
+ */
 Resource DBManager::getResourceById(unsigned int id)
 {
     SelfManagedDatabase database;
@@ -137,9 +163,7 @@ Resource DBManager::getResourceById(unsigned int id)
                     );
 
         getResource.bindValue(":id", id);
-
         getResource.exec();
-
         getResource.next();
 
         Resource newResource(
@@ -154,6 +178,10 @@ Resource DBManager::getResourceById(unsigned int id)
 }
 
 
+/**
+ * @brief Creates a resource type model
+ * @return A resource types model
+ */
 QSqlQueryModel * DBManager::getResourcesTypesModel()
 {
     SelfManagedDatabase database;
@@ -170,6 +198,10 @@ QSqlQueryModel * DBManager::getResourcesTypesModel()
 }
 
 
+/**
+ * @brief Adds a client to the database
+ * @param client The new client
+ */
 void DBManager::addClient(const Client & client)
 {
     SelfManagedDatabase database;
@@ -219,6 +251,11 @@ void DBManager::addClient(const Client & client)
     }
 }
 
+
+/**
+ * @brief Adds a resource to the database
+ * @param resource The new resource
+ */
 void DBManager::addRessource(const Resource &resource)
 {
     SelfManagedDatabase database;
@@ -247,6 +284,10 @@ void DBManager::addRessource(const Resource &resource)
 }
 
 
+/**
+ * @brief Adds an IT Technician and his account to the database
+ * @param itTech The new IT Technician
+ */
 void DBManager::addITTech(const ITTech &itTech)
 {
     SelfManagedDatabase database;
@@ -284,6 +325,11 @@ void DBManager::addITTech(const ITTech &itTech)
     }
 }
 
+
+/**
+ * @brief Edits a resource in the database
+ * @param resource The resource to update
+ */
 void DBManager::editResource(const Resource & resource)
 {
     SelfManagedDatabase database;
@@ -383,6 +429,10 @@ bool DBManager::checkAccount(const QString login, const QString password)
 }
 
 
+/**
+ * @brief Deletes the specified client from the database
+ * @param clientId The id of the client to delete
+ */
 void DBManager::deleteClient(unsigned int clientId)
 {
     SelfManagedDatabase database;

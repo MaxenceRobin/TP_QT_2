@@ -1,5 +1,8 @@
 #include "selfmanageddatabase.h"
 
+/**
+ * @brief Creates the object and opens the database
+ */
 SelfManagedDatabase::SelfManagedDatabase()
     : QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"))
 {
@@ -15,6 +18,10 @@ SelfManagedDatabase::SelfManagedDatabase()
     }
 }
 
+
+/**
+ * @brief Destructs the object and closes the database
+ */
 SelfManagedDatabase::~SelfManagedDatabase()
 {
     // If the database was successfully opened, it has to be closed

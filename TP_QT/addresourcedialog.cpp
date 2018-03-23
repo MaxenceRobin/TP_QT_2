@@ -13,7 +13,11 @@
 //Input error messages
 #define ERROR_MSG_COMPULSORY_INPUT "Tous les champs obligatoires (*) doivent être complétés"
 
-
+/**
+ * @brief Constructs the dialog
+ * @param idResource The id of the resource to modify, if defined
+ * @param parent
+ */
 AddResourceDialog::AddResourceDialog(int idResource, QWidget *parent) :
     mIdResource(idResource), QDialog(parent),
     ui(new Ui::AddResourceDialog)
@@ -49,6 +53,9 @@ AddResourceDialog::AddResourceDialog(int idResource, QWidget *parent) :
 }
 
 
+/**
+ * @brief Checks that the form is correct before submiting it
+ */
 void AddResourceDialog::checkBeforeSubmit()
 {
     if (ui->nameLineEdit->text().length() == 0 || ui->firstNameLineEdit->text().length() == 0) {
@@ -96,6 +103,10 @@ void AddResourceDialog::checkBeforeSubmit()
     accept();
 }
 
+
+/**
+ * @brief Changes the form if the resource is an IT Technician
+ */
 void AddResourceDialog::on_typeComboBox_currentIndexChanged()
 {
     if (ui->typeComboBox->currentText() == ITTech::RESOURCE_TYPE_IT_TECH)

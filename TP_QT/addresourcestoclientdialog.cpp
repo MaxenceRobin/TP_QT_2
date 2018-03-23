@@ -2,8 +2,11 @@
 #include "ui_addresourcestoclientdialog.h"
 #include "dbmanager.h"
 
-#include <QDebug>
 
+/**
+ * @brief Constructs the dialog
+ * @param parent
+ */
 AddResourcesToClientDialog::AddResourcesToClientDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddResourcesToClientDialog)
@@ -39,6 +42,11 @@ AddResourcesToClientDialog::~AddResourcesToClientDialog()
     delete ui;
 }
 
+
+/**
+ * @brief Filters the resources
+ * @param resourceType The selected resource type
+ */
 void AddResourcesToClientDialog::on_resourceTypeComboBox_currentIndexChanged(const QString &resourceType)
 {
     //Filters by
@@ -48,6 +56,11 @@ void AddResourcesToClientDialog::on_resourceTypeComboBox_currentIndexChanged(con
     ui->addButton->setEnabled(false);
 }
 
+
+/**
+ * @brief Enables or disables the add resource button, if a resource is selected or not
+ * @param index
+ */
 void AddResourcesToClientDialog::on_resourcesTableView_clicked(const QModelIndex &index)
 {
     //Checks if a resource if selected to allow to click on addButton
@@ -57,27 +70,20 @@ void AddResourcesToClientDialog::on_resourcesTableView_clicked(const QModelIndex
         ui->addButton->setEnabled(false);
 }
 
+
+/**
+ * @brief Creates the selected resources list
+ */
 void AddResourcesToClientDialog::createResourcesList()
 {
     QList<Resource> resources;
 
-    //emit newResourcesTest(ui->resourcesTableView->selectionModel()->selectedRows());
-
     for (QModelIndex & item : ui->resourcesTableView->selectionModel()->selectedRows())
     {
-//        resources << Resource(item.child(0, 0).data(Qt::DisplayRole).toString(),
-//                              item.child(0, 1).data(Qt::DisplayRole).toString(),
-//                              item.child(0, 2).data(Qt::DisplayRole).toString());
-
         resources << Resource(ui->resourcesTableView->model()->index(item.row(), 1).data().toString(),
                               ui->resourcesTableView->model()->index(item.row(), 2).data().toString(),
                               ui->resourcesTableView->model()->index(item.row(), 3).data().toString(),
                               ui->resourcesTableView->model()->index(item.row(), 0).data().toInt());
-
-        qDebug() << resources.last().getId()
-                 << resources.last().getFirstName()
-                 << resources.last().getLastName()
-                 << resources.last().getResourceType();
     }
 
     emit newResources(resources);

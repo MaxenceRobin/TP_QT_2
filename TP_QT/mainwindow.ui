@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="ressources.qrc">
-    <normaloff>:/mainWndowIcon</normaloff>:/mainWndowIcon</iconset>
+    <normaloff>:/appIcon</normaloff>:/appIcon</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -336,7 +336,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="fileMenu">

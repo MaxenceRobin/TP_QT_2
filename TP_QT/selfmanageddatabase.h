@@ -3,6 +3,9 @@
 
 #include <QSqlDatabase>
 
+/**
+ * @brief Class used to manage the database connexions
+ */
 class SelfManagedDatabase : public QSqlDatabase
 {
 public:

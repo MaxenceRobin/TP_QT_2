@@ -3,6 +3,10 @@
 #include "qmessagebox.h"
 #include "dbmanager.h"
 
+/**
+ * @brief Constructs the login dialog
+ * @param parent
+ */
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginDialog)
@@ -16,6 +20,9 @@ LoginDialog::~LoginDialog()
     delete ui;
 }
 
+/**
+ * @brief Connects the user to the software
+ */
 void LoginDialog::connect()
 {
     if (checkLogin())
@@ -27,7 +34,10 @@ void LoginDialog::connect()
     }
 }
 
-
+/**
+ * @brief Checks that the account exists on the database
+ * @return True if it exists, false else
+ */
 bool LoginDialog:: checkLogin()
 {
     return DBManager::checkAccount(ui->loginLineEditI->text(), ui->passwordLineEdit->text());

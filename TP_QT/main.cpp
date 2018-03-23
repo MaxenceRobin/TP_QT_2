@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
         C_INIT_BD::Creation_BD();
     }
 
+    //Shows the main window only if the login is correct
     if (d.exec() == QDialog::Accepted)
     {
         w.show();

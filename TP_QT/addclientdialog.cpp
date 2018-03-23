@@ -64,7 +64,9 @@ AddClientDialog::~AddClientDialog()
     delete ui;
 }
 
-
+/**
+ * @brief Shows the addResourceToClientDialog
+ */
 void AddClientDialog::addResources()
 {
     resourceDialog->show();
@@ -109,6 +111,11 @@ void AddClientDialog::checkBeforeSubmit()
     accept();
 }
 
+
+/**
+ * @brief Gets new resources for the client
+ * @param resources The new resources
+ */
 void AddClientDialog::getNewResources(QList<Resource> resources)
 {
     // Removes the duplicates
