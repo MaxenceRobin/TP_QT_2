@@ -36,6 +36,12 @@ private slots:
 
     void on_deleteResourcePushButton_clicked();
 
+    void on_resourcesTreeView_clicked(const QModelIndex &index);
+
+    void on_deleteClientPushButton_clicked();
+
+    void on_clientTableView_clicked(const QModelIndex &index);
+
 private:
     void refreshResourceView();
     void refreshClientsView();

@@ -36,14 +36,11 @@ public:
     static void addITTech(const ITTech &itTech);
     static bool checkAccount(const QString login, const QString password);
 
-<<<<<<< HEAD
-    static void editResource(const Resource &resource);
 
-    static void deleteResource(const Resource &resource);
-=======
-    static void editResource(const Resource & resource);
+    static void editResource(const Resource &resource);
     static void editITTech(const ITTech & resource);
->>>>>>> f2fe462cd730939c5a0b88c7923ac1a8a737532b
+    static void deleteResource(const Resource &resource);
+    static void deleteClient(unsigned int clientId);
 
 private:
 

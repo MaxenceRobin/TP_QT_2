@@ -55,6 +55,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->resourcesTreeView, SIGNAL(doubleClicked(QModelIndex)),
                      this, SLOT(showUpdateResource(QModelIndex)));
 
+    ui->deleteResourcePushButton->setEnabled(false);
+    ui->deleteClientPushButton->setEnabled(false);
+
     //Sets the default dates
     on_resetPushButton_clicked();
 
@@ -209,6 +212,9 @@ void MainWindow::on_resetPushButton_clicked()
 }
 
 
+/**
+ * @brief Handles the resource deletion
+ */
 void MainWindow::on_deleteResourcePushButton_clicked()
 {
     if (ui->resourcesTreeView->selectionModel()->hasSelection())
@@ -222,8 +228,59 @@ void MainWindow::on_deleteResourcePushButton_clicked()
             Resource resourceToDelete = DBManager::getResourceById(ui->resourcesTreeView->selectionModel()->currentIndex().data(Qt::UserRole + 1).toInt());
             DBManager::deleteResource(resourceToDelete);
             refreshResourceView();
+            ui->statusBar->showMessage("Vous avez supprimé un personnel.");
         }
     }
 }
 
 
+
+/**
+ * @brief Enables the resource delete button only when it should be
+ * @param index The index of the selection
+ */
+void MainWindow::on_resourcesTreeView_clicked(const QModelIndex &index)
+{
+    if (!index.isValid() || index.parent() == QModelIndex())
+        ui->deleteResourcePushButton->setEnabled(false);
+    else
+        ui->deleteResourcePushButton->setEnabled(true);
+}
+
+
+/**
+ * @brief Handles the client deletion
+ */
+void MainWindow::on_deleteClientPushButton_clicked()
+{
+    if (ui->clientTableView->selectionModel()->hasSelection())
+    {
+        QMessageBox::StandardButton confirmDelete;
+
+        unsigned int clientId = ui->clientTableView->selectionModel()->selectedRows(DBManager::INDEX_ID_COL_CLIENTS_MODEL).value(0).data().toInt();
+        QString clientLName = ui->clientTableView->selectionModel()->selectedRows(DBManager::INDEX_LNAME_COL_CLIENTS_MODEL).value(0).data().toString();
+        QString clientFName = ui->clientTableView->selectionModel()->selectedRows(DBManager::INDEX_FNAME_COL_CLIENTS_MODEL).value(0).data().toString();
+        confirmDelete = QMessageBox::question(this, "Confirmation suppression",
+                "Souhaitez-vous supprimer le client " + clientLName + " " + clientFName + " ?",
+                QMessageBox::Yes|QMessageBox::No);
+        if (confirmDelete == QMessageBox::Yes)
+        {
+            DBManager::deleteClient(clientId);
+            ui->deleteClientPushButton->setEnabled(false);
+            refreshClientsView();
+            ui->statusBar->showMessage("Vous avez supprimé un client.");
+        }
+    }
+}
+
+/**
+ * @brief Enables the client delete button only when it should be
+ * @param index The index of the selection
+ */
+void MainWindow::on_clientTableView_clicked(const QModelIndex &index)
+{
+    if (index.isValid())
+        ui->deleteClientPushButton->setEnabled(true);
+    else
+        ui->deleteClientPushButton->setEnabled(false);
+}

@@ -142,8 +142,6 @@ Resource DBManager::getResourceById(unsigned int id)
 
         getResource.next();
 
-        qDebug() << getResource.value("Nom").toString();
-
         Resource newResource(
                     getResource.value("Nom").toString(),
                     getResource.value("Prenom").toString(),
@@ -151,13 +149,10 @@ Resource DBManager::getResourceById(unsigned int id)
                     id
                     );
 
-        qDebug() << newResource.getFirstName()
-                 << newResource.getLastName()
-                 << newResource.getResourceType();
-
         return newResource;
     }
 }
+
 
 QSqlQueryModel * DBManager::getResourcesTypesModel()
 {
@@ -330,7 +325,6 @@ void DBManager::editResource(const Resource & resource)
     }
 }
 
-<<<<<<< HEAD
 
 /**
  * @brief Deletes the specified resource from the database
@@ -360,12 +354,10 @@ void DBManager::deleteResource(const Resource &resource)
 }
 
 
-=======
 void DBManager::editITTech(const ITTech & resource)
 {
 }
 
->>>>>>> f2fe462cd730939c5a0b88c7923ac1a8a737532b
 /**
  * @brief Checks if the accout exists in the database
  * @param login The login
@@ -388,4 +380,25 @@ bool DBManager::checkAccount(const QString login, const QString password)
             return true;
     }
     return false;
+}
+
+
+void DBManager::deleteClient(unsigned int clientId)
+{
+    SelfManagedDatabase database;
+
+    if (database.isOpen())
+    {
+        //Deletes the RDVs
+        QSqlQuery deleteRdvQuery;
+        deleteRdvQuery.prepare("DELETE FROM TRdv WHERE IdClient = :idClient");
+        deleteRdvQuery.bindValue(":idClient", clientId);
+        deleteRdvQuery.exec();
+
+        //Deletes the client
+        QSqlQuery deleteClientQuery;
+        deleteClientQuery.prepare("DELETE FROM TClient WHERE Id = :id");
+        deleteClientQuery.bindValue(":id", clientId);
+        deleteClientQuery.exec();
+    }
 }
